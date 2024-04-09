@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './HFunc.css'
+import './Home.css'
 
 
 

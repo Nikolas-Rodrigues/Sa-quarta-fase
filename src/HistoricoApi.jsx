@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './HApi.css'
+import './Home.css'
 
 
 
@@ -10,7 +10,7 @@ function HApi() {
 
   return (
     <div className='index'>
-      <h1>H api</h1>
+      <h1>EPIS</h1>
       </div>
   )
 }

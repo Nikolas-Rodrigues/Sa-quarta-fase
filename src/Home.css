@@ -14,7 +14,7 @@ body {
 
 }
 
-.titulo{
+.titulo {
   padding-top: 30px;
 }
 
@@ -40,7 +40,6 @@ body {
   width: 150px;
 }
 
-
 .logo-div {
   text-align: center;
   margin: auto;
@@ -54,4 +53,80 @@ body {
 
 }
 
+h1 {
+  color: black;
+  text-align: center;
+}
 
+
+.adicionarEpi {
+  color: white;
+  margin-top: 5%;
+  background-color: blue;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.content {
+  background-color: rgb(255, 255, 255);
+  height: 350px;
+  width: 850px;
+  margin: auto;
+  border-radius: 5%;
+  text-align: center;
+
+  z-index: 0;
+  position: absolute;
+  margin: 39px 17px;
+}
+
+.excluir-epi,
+.editar-epi,
+.listar-epi {
+  display: none;
+}
+
+.content h2 {
+  display: inline-block;
+  padding: 0 25px;
+
+}
+
+
+
+.navApiGeral{
+  margin-left: 25px;
+}
+.navApi,
+.navApi2,
+.navApi3,
+.navApi4 {
+  background-color: darkgray;
+  border: none;
+  height: 60px;
+  width: 80px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute;
+
+}
+.navApi{
+left: 250px;
+}
+.navApi2{
+  left: 350px;
+}
+.navApi3{
+  left: 450px;
+}
+.navApi4{
+  left: 550px;
+}
+
+
+
+
+.navApi {
+  background-color: white;
+}

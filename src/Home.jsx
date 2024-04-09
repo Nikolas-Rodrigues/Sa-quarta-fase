@@ -12,8 +12,8 @@ function Home() {
         <h1 className='titulo'>Index</h1>
         <div className='links'>
           <div className='lado'>
-            <Link to={`/Api`} className='link'>
-              <h1>Api</h1>
+            <Link to={`/Epi`} className='link'>
+              <h1>EPI</h1>
             </Link>
             <Link to={`/Funcionarios`} className='link'>
               <h1>Funcionarios</h1>
@@ -27,7 +27,7 @@ function Home() {
           </div>
           <div className='lado'>
             <Link to={`/HApi`} className='link'>
-              <h1>Historico de uso de epi</h1>
+              <h1>Historico de uso de EPI</h1>
             </Link>
             <Link to={`/HFunc`} className='link'>
               <h1>Historico de uso de funcionario</h1>

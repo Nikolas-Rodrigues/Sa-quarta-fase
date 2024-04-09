@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Func.css'
+import './Home.css'
 
 
 
