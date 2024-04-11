@@ -19,7 +19,6 @@ const paginas = createBrowserRouter([
 
 
 
-
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

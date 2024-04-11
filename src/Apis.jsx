@@ -1,8 +1,4 @@
 import { useState } from 'react'
-// import './Apis.css '
-import DatePicker from 'react-date-picker'
-// Lib do calendario
-// https://www.npmjs.com/package/react-date-picker
 
 
 function Api() {
@@ -21,7 +17,6 @@ function Api() {
             <h1>Codigo do Equipamento</h1>
             <input name="adicionarEpiCodigo" />
             <h1>Validade do Equipamento</h1>
-            < DatePicker onChange={"a"} valor={"a"} />
 
             <button>
               <span>Adicionar</span>
