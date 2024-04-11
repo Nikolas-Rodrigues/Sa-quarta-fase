@@ -123,10 +123,10 @@ left: 250px;
 .navApi4{
   left: 550px;
 }
-
-
-
-
 .navApi {
   background-color: white;
+}
+
+.listarEpi, .excluirEpi , .editarEpi{
+  display: none;
 }

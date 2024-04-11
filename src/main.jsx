@@ -4,18 +4,18 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './Home.jsx'
 import Epi from './Epis.jsx'
 import Func from './Func.jsx'
-import HApi from './HistoricoApi.jsx'
-import HFunc from './HistoricoFunc.jsx'
+import HApi from './HApi.jsx'
+import HFunc from './HFunc.jsx'
 import Cadastro from './Cadastro.jsx'
 
 
 const paginas = createBrowserRouter([
   { path: '/', element: <Home /> },
-  { path: '/Funcionarios', element: <Func /> },
   { path: '/Epi', element: <Epi /> },
-  { path: '/Api', element: <HApi /> },
-  { path: '/HFunc', element: <HFunc /> },
+  { path: '/Funcionarios', element: <Func /> },
   { path: '/Cadastro', element: <Cadastro /> },
+  { path: '/HApi', element: <HApi /> },
+  { path: '/HFunc', element: <HFunc /> },
 
 
 

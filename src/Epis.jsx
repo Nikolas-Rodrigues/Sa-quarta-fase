@@ -4,43 +4,113 @@ import './Home.css'
 
 
 function Epi() {
-   
-  function listar() {
-    console.log('SEXO ENTRE HETERO QUENTE FESTA RED PILL')
 
-    let aba1api = document.getElementById("aba1api");
-    let aba2api = document.getElementById("aba2api");
-    let aba3api = document.getElementById("aba3api");
-    let aba4api = document.getElementById("aba4api");
+  function cadastrar() {
+    let btnCadastrar = document.getElementById("btnCadastrar");
+    let btnListar = document.getElementById("btnListar");
+    let btnEditar = document.getElementById("btnEditar");
+    let btnRemover = document.getElementById("btnRemover");
 
     let cadastroEpi = document.getElementById("cadastrarEpi");
     let listarEpi = document.getElementById("listarEpi");
+    let excluirEpi = document.getElementById("excluirEpi");
+    let editarEpi = document.getElementById("editarEpi");
 
 
-    aba1api.style.backgroundColor = "darkgray";
-    aba2api.style.backgroundColor = "white";
-    aba3api.style.backgroundColor = "darkgray";
-    aba4api.style.backgroundColor = "darkgray";
+    btnCadastrar.style.backgroundColor = "white";
+    btnListar.style.backgroundColor = "darkgray";
+    btnEditar.style.backgroundColor = "darkgray";
+    btnRemover.style.backgroundColor = "darkgray";
 
-    cadastroEpi.style.display = "none"
-    listarEpi.style.display = "none"
-}
+    cadastroEpi.style.display = "block";
+    listarEpi.style.display = "none";
+    excluirEpi.style.display = "none";
+    editarEpi.style.display = "none";
+  }
+  function listar() {
+    let btnCadastrar = document.getElementById("btnCadastrar");
+    let btnListar = document.getElementById("btnListar");
+    let btnEditar = document.getElementById("btnEditar");
+    let btnRemover = document.getElementById("btnRemover");
+
+    let cadastroEpi = document.getElementById("cadastrarEpi");
+    let listarEpi = document.getElementById("listarEpi");
+    let excluirEpi = document.getElementById("excluirEpi");
+    let editarEpi = document.getElementById("editarEpi");
+
+
+    btnCadastrar.style.backgroundColor = "darkgray";
+    btnListar.style.backgroundColor = "white";
+    btnEditar.style.backgroundColor = "darkgray";
+    btnRemover.style.backgroundColor = "darkgray";
+
+    cadastroEpi.style.display = "none";
+    listarEpi.style.display = "block";
+    excluirEpi.style.display = "none";
+    editarEpi.style.display = "none";
+  }
+
+  function editar() {
+    let btnCadastrar = document.getElementById("btnCadastrar");
+    let btnListar = document.getElementById("btnListar");
+    let btnEditar = document.getElementById("btnEditar");
+    let btnRemover = document.getElementById("btnRemover");
+
+    let cadastroEpi = document.getElementById("cadastrarEpi");
+    let listarEpi = document.getElementById("listarEpi");
+    let excluirEpi = document.getElementById("excluirEpi");
+    let editarEpi = document.getElementById("editarEpi");
+
+
+    btnCadastrar.style.backgroundColor = "darkgray";
+    btnListar.style.backgroundColor = "darkgray";
+    btnEditar.style.backgroundColor = "white";
+    btnRemover.style.backgroundColor = "darkgray";
+
+    cadastroEpi.style.display = "none";
+    listarEpi.style.display = "none";
+    excluirEpi.style.display = "none";
+    editarEpi.style.display = "block";
+  }
+  function remover() {
+    let btnCadastrar = document.getElementById("btnCadastrar");
+    let btnListar = document.getElementById("btnListar");
+    let btnEditar = document.getElementById("btnEditar");
+    let btnRemover = document.getElementById("btnRemover");
+
+    let cadastroEpi = document.getElementById("cadastrarEpi");
+    let listarEpi = document.getElementById("listarEpi");
+    let excluirEpi = document.getElementById("excluirEpi");
+    let editarEpi = document.getElementById("editarEpi");
+
+
+    btnCadastrar.style.backgroundColor = "darkgray";
+    btnListar.style.backgroundColor = "darkgray";
+    btnEditar.style.backgroundColor = "darkgray";
+    btnRemover.style.backgroundColor = "white";
+
+    cadastroEpi.style.display = "none";
+    listarEpi.style.display = "none";
+    excluirEpi.style.display = "block";
+    editarEpi.style.display = "none";
+  }
+
 
   return (
     <>
       <div className='index'>
         <h1>Epis</h1>
-        
+
         <div className='navApiGeral'>
-          <button className='navApi' id="aba1api">Cadastrar</button>
-          
-          <button className='navApi2' id="aba2api" onClick={listar}>Listar</button>
-          <button className='navApi3' id="aba3api">Editar</button>
-          <button className='navApi4' id="aba4api">Remover</button>
+          <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
+
+          <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
+          <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
+          <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
         </div>
         <div className='content'>
-        
-          <div className='cadastro-epi' id="cadastrarEpi">
+
+          <div className='cadastroEpi' id="cadastrarEpi">
 
             <div className='cadastro-epi-div'>
               <h2>Nome do Equipamento: </h2>
@@ -61,37 +131,29 @@ function Epi() {
             </button>
           </div>
 
-
-
-          <div className='listar-epi' id="listrarEpi">
-
-            <h1>Funcionou pika</h1>
+          <div className='listarEpi' id="listarEpi">
+            <h1>Listar</h1>
+            <input name="" />
+            <button>
+              <span>Listar</span>
+            </button>
           </div>
 
-
-
-          <div className='editar-epi'>
-
-
+          <div className='editarEpi' id="editarEpi">
+            <h1>Editar</h1>
+            <input name="" />
+            <button>
+              <span>Editar</span>
+            </button>
           </div>
 
-
-
-
-
-          <div className='excluir-epi'>
-            <h1></h1>
+          <div className='excluirEpi' id="excluirEpi">
+            <h1>Excluir</h1>
             <input name="" />
             <button>
               <span>Apagar</span>
             </button>
           </div>
-
-
-
-
-
-
 
         </div>
       </div>
