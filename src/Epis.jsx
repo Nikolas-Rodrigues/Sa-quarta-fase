@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -99,7 +100,9 @@ function Epi() {
   return (
     <>
       <div className='index'>
-        <h1>Epis</h1>
+      <Link to={"/"}>
+          < h1 > Epis</h1>
+        </Link >
 
         <div className='navApiGeral'>
           <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
