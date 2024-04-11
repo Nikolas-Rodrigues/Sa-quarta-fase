@@ -59,7 +59,8 @@ h1 {
 }
 
 
-.adicionarEpi {
+.adicionarEpi,
+.adicionarFunc {
   color: white;
   margin-top: 5%;
   background-color: blue;
@@ -83,7 +84,10 @@ h1 {
 
 .excluir-epi,
 .editar-epi,
-.listar-epi {
+.listar-epi,
+.excluir-func,
+.editar-func,
+.listar-func {
   display: none;
 }
 
@@ -95,13 +99,19 @@ h1 {
 
 
 
-.navApiGeral{
+.navApiGeral,
+.navFuncGeral {
   margin-left: 25px;
 }
+
 .navApi,
 .navApi2,
 .navApi3,
-.navApi4 {
+.navApi4,
+.navFunc,
+.navFunc2,
+.navFunc3,
+.navFunc4 {
   background-color: darkgray;
   border: none;
   height: 60px;
@@ -111,22 +121,36 @@ h1 {
   position: absolute;
 
 }
-.navApi{
-left: 250px;
+
+.navApi,
+.navFunc {
+  left: 250px;
 }
-.navApi2{
+
+.navApi2,
+.navFunc2 {
   left: 350px;
 }
-.navApi3{
+
+.navApi3,
+.navFunc3 {
   left: 450px;
 }
-.navApi4{
+
+.navApi4,
+.navFunc4 {
   left: 550px;
 }
-.navApi {
+
+.navApi.navFunc {
   background-color: white;
 }
 
-.listarEpi, .excluirEpi , .editarEpi{
+.listarEpi,
+.excluirEpi,
+.editarEpi,
+.listarFunc,
+.excluirFunc,
+.editarFunc {
   display: none;
 }
