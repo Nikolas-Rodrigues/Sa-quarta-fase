@@ -28,6 +28,7 @@ function Epi() {
     excluirEpi.style.display = "none";
     editarEpi.style.display = "none";
   }
+  
   function listar() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
@@ -100,7 +101,9 @@ function Epi() {
   return (
     <>
       <div className='index'>
-        <h1>Epis</h1>
+      <Link to={"/"}>
+          <h1> Epis</h1>
+        </Link >
 
           <div className='navApiGeral'>
             <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
