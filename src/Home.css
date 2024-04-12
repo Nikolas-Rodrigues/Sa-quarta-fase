@@ -142,7 +142,7 @@ h1 {
   left: 550px;
 }
 
-.navApi.navFunc {
+.navApi,.navFunc {
   background-color: white;
 }
 
@@ -153,4 +153,18 @@ h1 {
 .excluirFunc,
 .editarFunc {
   display: none;
+}
+
+	
+.todo {
+  background-color: rgb(255, 255, 255);
+  height: 350px;
+  width: 850px;
+  margin: auto;
+  border-radius: 5%;
+  text-align: center;
+  z-index: 0;
+  position: absolute;
+  margin: 39px 17px;
+  font-size: x-small;
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom';
 
@@ -7,8 +7,24 @@ import { Link } from 'react-router-dom';
 
 
 function Func() {
+  const [nome, setNome] = useState(null)
+  const [cpf, setCpf] = useState(null)
+  const [cargo, setCargo] = useState(null)
+  const [id, setId] = useState(null)
 
-  function cadastrar() {
+
+
+  function adicionar() {
+    console.log(nome, cpf, cargo)
+
+
+
+  }
+
+
+
+
+  function cadastrarAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
     let btnEditar = document.getElementById("btnEditar");
@@ -30,7 +46,7 @@ function Func() {
     excluirFunc.style.display = "none";
     editarFunc.style.display = "none";
   }
-  function listar() {
+  function listarAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
     let btnEditar = document.getElementById("btnEditar");
@@ -53,7 +69,7 @@ function Func() {
     editarFunc.style.display = "none";
   }
 
-  function editar() {
+  function editarAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
     let btnEditar = document.getElementById("btnEditar");
@@ -75,7 +91,7 @@ function Func() {
     excluirFunc.style.display = "none";
     editarFunc.style.display = "block";
   }
-  function remover() {
+  function removerAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
     let btnEditar = document.getElementById("btnEditar");
@@ -103,48 +119,60 @@ function Func() {
     <>
       <div className='index'>
         <Link to={"/"}>
-          < h1 > Funcionarios</h1>
+          <h1> Funcionarios</h1>
         </Link >
         <div className='navFuncGeral'>
-          <button className='navFunc' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
-          <button className='navFunc2' id="btnListar" onClick={listar}>Listar</button>
-          <button className='navFunc3' id="btnEditar" onClick={editar}>Editar</button>
-          <button className='navFunc4' id="btnRemover" onClick={remover}>Remover</button>
+          <button className='navFunc' id="btnCadastrar" onClick={cadastrarAba}>Cadastrar</button>
+          <button className='navFunc2' id="btnListar" onClick={listarAba}>Listar</button>
+          <button className='navFunc3' id="btnEditar" onClick={editarAba}>Editar</button>
+          <button className='navFunc4' id="btnRemover" onClick={removerAba}>Remover</button>
         </div>
         <div className='content'>
 
           <div className='cadastroFunc' id="cadastrarFunc">
 
-            <div className='cadastro-Func-div'>
-              <h2>Nome do Equipamento: </h2>
-              <input name="adicionarFuncNome" />
+            <div>
+              <h2>Nome: </h2>
+              <input name="adicionarFuncNome" onChange={(evento) => setNome(evento.target.value)} />
             </div>
 
             <div>
-              <h2>Codigo do Equipamento</h2>
-              <input name="adicionarFuncCodigo" />
+              <h2>CPF:</h2>
+              <input name="adicionarFuncCodigo" onChange={(evento) => setCpf(evento.target.value)} />
             </div>
 
             <div>
-              <h2>Validade</h2>
-              <input type='date' name="adicionarFuncValidade" />
+              <h2>Cargo:</h2>
+              <input type='text' name="adicionarFuncValidade" onChange={(evento) => setCargo(evento.target.value)} />
             </div>
-            <button className='adicionarFunc'>
+            <button className='adicionarFunc' onClick={adicionar}>
               <span>Adicionar</span>
             </button>
           </div>
 
           <div className='listarFunc' id="listarFunc">
-            <h1>Listar</h1>
-            <input name="" />
-            <button>
-              <span>Listar</span>
-            </button>
+            <h1>Listar Funcionarios</h1>
+
+            <span></span>
+
           </div>
 
           <div className='editarFunc' id="editarFunc">
-            <h1>Editar</h1>
-            <input name="" />
+            <h1>Editar Id:</h1>
+            <input type='number' />
+            <div>
+              <h2>Nome</h2>
+              <input type="number" />
+            </div>
+            <div>
+              <h2>CPF</h2>
+              <input type="number" />
+            </div>
+            <div>
+              <h2>Cargo</h2>
+              <input type="number" />
+            </div>
+
             <button>
               <span>Editar</span>
             </button>
