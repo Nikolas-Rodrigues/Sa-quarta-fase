@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Home.css'
+import { Link } from 'react-router-dom';
 
 
 
@@ -101,8 +102,9 @@ function Func() {
   return (
     <>
       <div className='index'>
-        <h1>Func</h1>
-
+        <Link to={"/"}>
+          < h1 > Funcionarios</h1>
+        </Link >
         <div className='navFuncGeral'>
           <button className='navFunc' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
           <button className='navFunc2' id="btnListar" onClick={listar}>Listar</button>
@@ -157,7 +159,7 @@ function Func() {
           </div>
 
         </div>
-      </div>
+      </div >
     </>
   )
 }

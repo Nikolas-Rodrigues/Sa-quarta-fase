@@ -100,9 +100,7 @@ function Epi() {
   return (
     <>
       <div className='index'>
-      <Link to={`/`} className='link'>
         <h1>Epis</h1>
-      </Link>
 
           <div className='navApiGeral'>
             <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
