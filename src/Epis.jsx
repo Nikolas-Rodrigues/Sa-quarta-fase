@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -99,63 +100,65 @@ function Epi() {
   return (
     <>
       <div className='index'>
+      <Link to={`/`} className='link'>
         <h1>Epis</h1>
+      </Link>
 
-        <div className='navApiGeral'>
-          <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
+          <div className='navApiGeral'>
+            <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
 
-          <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
-          <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
-          <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
-        </div>
-        <div className='content'>
+            <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
+            <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
+            <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
+          </div>
+          <div className='content'>
 
-          <div className='cadastroEpi' id="cadastrarEpi">
+            <div className='cadastroEpi' id="cadastrarEpi">
 
-            <div className='cadastro-epi-div'>
-              <h2>Nome do Equipamento: </h2>
-              <input name="adicionarEpiNome" />
+              <div className='cadastro-epi-div'>
+                <h2>Nome do Equipamento: </h2>
+                <input name="adicionarEpiNome" />
+              </div>
+
+              <div>
+                <h2>Codigo do Equipamento</h2>
+                <input name="adicionarEpiCodigo" />
+              </div>
+
+              <div>
+                <h2>Validade</h2>
+                <input type='date' name="adicionarEpiValidade" />
+              </div>
+              <button className='adicionarEpi'>
+                <span>Adicionar</span>
+              </button>
             </div>
 
-            <div>
-              <h2>Codigo do Equipamento</h2>
-              <input name="adicionarEpiCodigo" />
+            <div className='listarEpi' id="listarEpi">
+              <h1>Listar</h1>
+              <input name="" />
+              <button>
+                <span>Listar</span>
+              </button>
             </div>
 
-            <div>
-              <h2>Validade</h2>
-              <input type='date' name="adicionarEpiValidade" />
+            <div className='editarEpi' id="editarEpi">
+              <h1>Editar</h1>
+              <input name="" />
+              <button>
+                <span>Editar</span>
+              </button>
             </div>
-            <button className='adicionarEpi'>
-              <span>Adicionar</span>
-            </button>
-          </div>
 
-          <div className='listarEpi' id="listarEpi">
-            <h1>Listar</h1>
-            <input name="" />
-            <button>
-              <span>Listar</span>
-            </button>
-          </div>
+            <div className='excluirEpi' id="excluirEpi">
+              <h1>Excluir</h1>
+              <input name="" />
+              <button>
+                <span>Apagar</span>
+              </button>
+            </div>
 
-          <div className='editarEpi' id="editarEpi">
-            <h1>Editar</h1>
-            <input name="" />
-            <button>
-              <span>Editar</span>
-            </button>
           </div>
-
-          <div className='excluirEpi' id="excluirEpi">
-            <h1>Excluir</h1>
-            <input name="" />
-            <button>
-              <span>Apagar</span>
-            </button>
-          </div>
-
-        </div>
       </div>
     </>
   )
