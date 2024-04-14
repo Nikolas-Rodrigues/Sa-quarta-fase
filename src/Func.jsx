@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom';
-
-
-
+import axios from 'axios';
 
 
 function Func() {
@@ -16,11 +14,7 @@ function Func() {
 
   function adicionar() {
     console.log(nome, cpf, cargo)
-
-
-
   }
-
 
 
 
