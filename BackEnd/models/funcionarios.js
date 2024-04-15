@@ -1,14 +1,13 @@
-
+import sequelize from '../database';
 import { DataTypes } from 'sequelize';
-import sequelize from '../dataBase/database';
 
 const Funcionario = sequelize.define('Funcionario', {
-    id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        primaryKey: true,
-      },
-    nome: {
+  id: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    primaryKey: true,
+  },
+  nome: {
     type: DataTypes.STRING,
     allowNull: false,
   },

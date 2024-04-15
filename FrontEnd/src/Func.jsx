@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+const host = "http://localhost:3000"
 
 function Func() {
   const [nome, setNome] = useState(null)
@@ -14,6 +14,10 @@ function Func() {
 
   function adicionar() {
     console.log(nome, cpf, cargo)
+
+    const teste = [nome, cpf, cargo]
+    axios.post(`${host}/funcionario`,teste)
+
   }
 
 
