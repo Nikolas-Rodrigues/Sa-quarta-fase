@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize'
 
-const sequelize = new Sequelize('postgres://hwpivqfw:pdS05tdj99xuoQjCUlOirSP8N1Dg9PLn@kesavan.db.elephantsql.com/hwpivqfw')
+const sequelize = new Sequelize('postgres://pooqbkmy:zVazK2zFLz-B-RguhEtvol8Xbfx4Cwm4@isabelle.db.elephantsql.com/pooqbkmy')
 
 try {
     await sequelize.authenticate()

@@ -1,7 +1,7 @@
 import sequelize from "../database.js"
 import { DataTypes } from "sequelize"
 
-const Epis = sequelize.define('epis', {
+const Epis = sequelize.define('Epis', {
 
     id: {
         type: DataTypes.INTEGER,
@@ -22,4 +22,4 @@ const Epis = sequelize.define('epis', {
     },
 }, {tableName: 'epis'})
 
-export { Epis }
+export default Epis 

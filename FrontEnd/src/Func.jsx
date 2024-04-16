@@ -13,15 +13,24 @@ function Func() {
 
 
   function adicionar() {
-    console.log(nome, cpf, cargo)
+    const dados = { nome, cpf, cargo }
+    axios.post(`${host}/funcionario`, dados)
+  }
+  function apagar() {
+    const dados1 = { id }
+    axios.delete(`${host}/funcionario`, dados1)
+  }
+  function listar() {
 
-    const teste = [nome, cpf, cargo]
-    axios.post(`${host}/funcionario`,teste)
+    axios.get(`${host}/funcionario`)
 
   }
+  function editar() {
+    console.log(nome, cpf, cargo)
+    const dados3 = { id, nome, cpf, cargo }
+    axios.put(`${host}/funcionario`, dados3)
 
-
-
+  }
   function cadastrarAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
@@ -32,7 +41,6 @@ function Func() {
     let listarFunc = document.getElementById("listarFunc");
     let excluirFunc = document.getElementById("excluirFunc");
     let editarFunc = document.getElementById("editarFunc");
-
 
     btnCadastrar.style.backgroundColor = "white";
     btnListar.style.backgroundColor = "darkgray";
@@ -126,7 +134,6 @@ function Func() {
           <button className='navFunc4' id="btnRemover" onClick={removerAba}>Remover</button>
         </div>
         <div className='content'>
-
           <div className='cadastroFunc' id="cadastrarFunc">
 
             <div>
@@ -150,36 +157,43 @@ function Func() {
 
           <div className='listarFunc' id="listarFunc">
             <h1>Listar Funcionarios</h1>
-
-            <span></span>
-
+            <button className='adicionarFunc' onClick={listar}>
+              <span>Butão</span>
+            </button>
           </div>
 
           <div className='editarFunc' id="editarFunc">
-            <h1>Editar Id:</h1>
-            <input type='number' />
+
             <div>
-              <h2>Nome</h2>
-              <input type="number" />
-            </div>
-            <div>
-              <h2>CPF</h2>
-              <input type="number" />
-            </div>
-            <div>
-              <h2>Cargo</h2>
-              <input type="number" />
+              <h2>Id a modificar: </h2>
+              <input type='number' onChange={(evento) => setNome(evento.target.value)} />
             </div>
 
-            <button>
-              <span>Editar</span>
+
+
+            <div>
+              <h2>Nome: </h2>
+              <input type='number' onChange={(evento) => setNome(evento.target.value)} />
+            </div>
+
+            <div>
+              <h2>CPF:</h2>
+              <input type='number' onChange={(evento) => setCpf(evento.target.value)} />
+            </div>
+
+            <div>
+              <h2>Cargo:</h2>
+              <input type='text' onChange={(evento) => setCargo(evento.target.value)} />
+            </div>
+            <button className='adicionarFunc' onClick={editar}>
+              <span>Adicionar</span>
             </button>
           </div>
 
           <div className='excluirFunc' id="excluirFunc">
             <h1>Excluir</h1>
-            <input name="" />
-            <button>
+            <input name="apagarFuncId" onChange={(evento) => setId(evento.target.value)} />
+            <button onClick={apagar}>
               <span>Apagar</span>
             </button>
           </div>

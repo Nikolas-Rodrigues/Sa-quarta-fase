@@ -1,4 +1,4 @@
-import sequelize from '../database';
+import sequelize from '../dataBase/database.js';
 import { DataTypes } from 'sequelize';
 
 const Funcionario = sequelize.define('Funcionario', {
@@ -6,13 +6,14 @@ const Funcionario = sequelize.define('Funcionario', {
     type: DataTypes.BIGINT,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
   },
   nome: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   cpf: {
-    type: DataTypes.STRING,
+    type: DataTypes.BIGINT,
     allowNull: false,
     unique: true,
   },
