@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios';
+const host = "http://localhost:3000"
 
 
 function Epi() {
+  const [id, setId] = useState(null)
+  const [codigo, setCodigo] = useState(null)
+  const [validade, setValidade] = useState(null)
+  const [nome, setNome] = useState(null)
 
   function cadastrar() {
     let btnCadastrar = document.getElementById("btnCadastrar");
@@ -50,6 +55,8 @@ function Epi() {
     listarEpi.style.display = "block";
     excluirEpi.style.display = "none";
     editarEpi.style.display = "none";
+
+    listarBackend();
   }
 
   function editar() {
@@ -97,7 +104,21 @@ function Epi() {
     editarEpi.style.display = "none";
   }
 
+  function adicionar() {
+    console.log(nome, codigo, validade)
+    let disponibilidade = false
+    const dados = { nome, codigo, validade ,disponibilidade}
+    axios.post(`${host}/epi`, dados)
+    alert('Salvo com sucesso!');
+    document.getElementById("adicionarEpiNome").value = '';
+    document.getElementById("adicionarEpiCodigo").value = '';
+    document.getElementById("adicionarEpiValidade").value = '';
+  }
 
+  function listarBackend() {
+    console.log('LISTANDO...')
+    axios.post(`${host}/listarEpi`, )
+  }
   return (
     <>
       <div className='index'>
@@ -118,21 +139,21 @@ function Epi() {
 
               <div className='cadastro-epi-div'>
                 <h2>Nome do Equipamento: </h2>
-                <input name="adicionarEpiNome" />
+                <input id="adicionarEpiNome" onChange={(evento) => setNome(evento.target.value)} />
               </div>
 
               <div>
                 <h2>Codigo do Equipamento</h2>
-                <input name="adicionarEpiCodigo" />
+                <input id="adicionarEpiCodigo" onChange={(evento) => setCodigo(evento.target.value)} />
               </div>
 
               <div>
                 <h2>Validade</h2>
-                <input type='date' name="adicionarEpiValidade" />
+                <input type='date' id="adicionarEpiValidade" onChange={(evento) => setValidade(evento.target.value)} />
               </div>
-              <button className='adicionarEpi'>
-                <span>Adicionar</span>
-              </button>
+              <button className='adicionarEpi' onClick={adicionar}>
+              <span>Adicionar</span>
+            </button>
             </div>
 
             <div className='listarEpi' id="listarEpi">
