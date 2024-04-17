@@ -12,25 +12,81 @@ function Func() {
 
 
 
-  function adicionar() {
-    const dados = { nome, cpf, cargo }
-    axios.post(`${host}/funcionario`, dados)
+
+
+  function adicionar() {//Perfeito
+    const dadosCad = { nome, cpf, cargo }
+    axios.post(`${host}/funcionario`, dadosCad)
+    document.getElementById("adicionarFuncNome").value = '';
+    document.getElementById("adicionarFuncCpf").value = '';
+    document.getElementById("adicionarFuncCargo").value = '';
+    if (nome != null && cpf != null && cargo != null) {
+      alert("Funcionario inserido com sucesso")
+    } else {
+      alert("Erro ao inserir funcionario")
+    }
   }
-  function apagar() {
-    const dados1 = { id }
-    axios.delete(`${host}/funcionario`, dados1)
-  }
+
   function listar() {
-
     axios.get(`${host}/funcionario`)
+  }
+
+  function editar() {//Perfeito
+
+    console.log(id, nome, cpf, cargo)
+    const dadosEdit = { id, nome, cpf, cargo }
+    axios.put(`${host}/funcionario`, dadosEdit)
+    document.getElementById("EditarFuncNome").value = '';
+    document.getElementById("EditarFuncCpf").value = '';
+    document.getElementById("EditarFuncCargo").value = '';
+    document.getElementById("EditarFuncId").value = '';
+    if (nome != null && cpf != null && cargo != null && id != null) {
+      alert("Funcionario editado com sucesso")
+    } else {
+      alert("Erro ao editado funcionario")
+    }
+
 
   }
-  function editar() {
-    console.log(nome, cpf, cargo)
-    const dados3 = { id, nome, cpf, cargo }
-    axios.put(`${host}/funcionario`, dados3)
+
+  function apagar() {
+    document.getElementById("apagarFuncId").value = '';
+    if (id != null) {
+      alert("Funcionario removido com sucesso")
+    }
+    else {
+      alert("Falha ao remover funcionario")
+    }
+    let data = JSON.stringify({
+      id: id,
+
+    });
+
+    let config = {
+      method: 'delete',
+      url: " http://localhost:3000/funcionario",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
+    }
+    axios.request(config)
+      .then((response) => {
+        console.log(response.data);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
 
   }
+
+
+
+
+
+
   function cadastrarAba() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
@@ -138,17 +194,17 @@ function Func() {
 
             <div>
               <h2>Nome: </h2>
-              <input name="adicionarFuncNome" onChange={(evento) => setNome(evento.target.value)} />
+              <input type='text' id="adicionarFuncNome" onChange={(evento) => setNome(evento.target.value)} />
             </div>
 
             <div>
               <h2>CPF:</h2>
-              <input name="adicionarFuncCodigo" onChange={(evento) => setCpf(evento.target.value)} />
+              <input type="number" id="adicionarFuncCpf" onChange={(evento) => setCpf(evento.target.value)} />
             </div>
 
             <div>
               <h2>Cargo:</h2>
-              <input type='text' name="adicionarFuncValidade" onChange={(evento) => setCargo(evento.target.value)} />
+              <input type='text' id="adicionarFuncCargo" onChange={(evento) => setCargo(evento.target.value)} />
             </div>
             <button className='adicionarFunc' onClick={adicionar}>
               <span>Adicionar</span>
@@ -166,24 +222,22 @@ function Func() {
 
             <div>
               <h2>Id a modificar: </h2>
-              <input type='number' onChange={(evento) => setNome(evento.target.value)} />
+              <input type='number' id='EditarFuncId' onChange={(evento) => setId(evento.target.value)} />
             </div>
-
-
 
             <div>
               <h2>Nome: </h2>
-              <input type='number' onChange={(evento) => setNome(evento.target.value)} />
+              <input type='text' id='EditarFuncNome' onChange={(evento) => setNome(evento.target.value)} />
             </div>
 
             <div>
               <h2>CPF:</h2>
-              <input type='number' onChange={(evento) => setCpf(evento.target.value)} />
+              <input type='number' id='EditarFuncCpf' onChange={(evento) => setCpf(evento.target.value)} />
             </div>
 
             <div>
               <h2>Cargo:</h2>
-              <input type='text' onChange={(evento) => setCargo(evento.target.value)} />
+              <input type='text' id='EditarFuncCargo' onChange={(evento) => setCargo(evento.target.value)} />
             </div>
             <button className='adicionarFunc' onClick={editar}>
               <span>Adicionar</span>
@@ -192,7 +246,7 @@ function Func() {
 
           <div className='excluirFunc' id="excluirFunc">
             <h1>Excluir</h1>
-            <input name="apagarFuncId" onChange={(evento) => setId(evento.target.value)} />
+            <input type='number' id="apagarFuncId" onChange={(evento) => setId(evento.target.value)} />
             <button onClick={apagar}>
               <span>Apagar</span>
             </button>
