@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import './Home.css'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 const host = "http://localhost:3000"
@@ -9,33 +9,43 @@ function Func() {
   const [cpf, setCpf] = useState(null)
   const [cargo, setCargo] = useState(null)
   const [id, setId] = useState(null)
+  const [funcs, setFuncs] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.post(`${host}/listarFunc`);
+        setFuncs(response.data.FuncResults);
+        console.table(response.data.FuncResults);
+      } catch (error) {
+        console.error('Erro ao obter dados do backend:', error);
+      }
+    }
+    fetchData();
+  }, []);
 
 
 
-
-
-  function adicionar() {//Perfeito
-    const dadosCad = { nome, cpf, cargo }
-    axios.post(`${host}/funcionario`, dadosCad)
+  function adicionar() {//perfeito
+    console.log(nome, cpf, cargo)
+    if (nome == null || cpf == null || cargo == null) {
+      alert("Faltando dados!")
+      return;
+    }
+    const dados = { nome, cpf, cargo }
+    axios.post(`${host}/addFunc`, dados)
+    alert('Salvo com sucesso!');
     document.getElementById("adicionarFuncNome").value = '';
     document.getElementById("adicionarFuncCpf").value = '';
     document.getElementById("adicionarFuncCargo").value = '';
-    if (nome != null && cpf != null && cargo != null) {
-      alert("Funcionario inserido com sucesso")
-    } else {
-      alert("Erro ao inserir funcionario")
-    }
   }
 
-  function listar() {
-    axios.get(`${host}/funcionario`)
-  }
 
-  function editar() {//Perfeito
+  function editar() {
 
     console.log(id, nome, cpf, cargo)
     const dadosEdit = { id, nome, cpf, cargo }
-    axios.put(`${host}/funcionario`, dadosEdit)
+    axios.put(`${host}/editarFunc`, dadosEdit)
     document.getElementById("EditarFuncNome").value = '';
     document.getElementById("EditarFuncCpf").value = '';
     document.getElementById("EditarFuncCargo").value = '';
@@ -58,15 +68,13 @@ function Func() {
       alert("Falha ao remover funcionario")
     }
 
-
-
     let data = JSON.stringify({
       id: id,
 
     });
     let config = {
       method: 'delete',
-      url: " http://localhost:3000/funcionario",
+      url: " http://localhost:3000/apagarFunc",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -80,12 +88,13 @@ function Func() {
       .catch((error) => {
         console.log(error);
       });
-
-
   }
 
 
-
+  function listarBackendFunc() {
+    console.log('LISTANDO...')
+    axios.post(`${host}/listarFunc`)
+  }
 
 
 
@@ -131,6 +140,7 @@ function Func() {
     listarFunc.style.display = "block";
     excluirFunc.style.display = "none";
     editarFunc.style.display = "none";
+    listarBackendFunc();
   }
 
   function editarAba() {
@@ -214,11 +224,17 @@ function Func() {
           </div>
 
           <div className='listarFunc' id="listarFunc">
-            <h1>Listar Funcionarios</h1>
-            <button className='adicionarFunc' onClick={listar}>
-              <span>Butão</span>
-            </button>
+            <h1>Listar</h1>
+            <ul>
+              {funcs.map(func => (
+                <li key={func.id}>
+                  {func.id} - {func.nome} - {func.cpf} - {func.cargo}
+                </li>
+              ))}
+            </ul>
           </div>
+
+
 
           <div className='editarFunc' id="editarFunc">
 

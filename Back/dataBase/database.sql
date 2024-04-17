@@ -13,6 +13,18 @@ CREATE TABLE epis (
   cargo VARCHAR(255)
 );
 
+CREATE TABLE Relatorios(
+  id SERIAL PRIMARY KEY,
+  IdFuncionario int,
+  IdEpi int,
+  Retirada DATE,
+  Devolucao DATE,
+);
+
+INSERT INTO Relatorios(IdFuncionario, IdEpi, Retirada, Devolucao)
+VALUES ('1', '4', "2013-06-01","2013-06-01");
+
+
 INSERT INTO epis(codigo, validade, nome, disponibilidade)
 VALUES ('00000','2013-06-01', 'Capacete norisk 58', false);
 

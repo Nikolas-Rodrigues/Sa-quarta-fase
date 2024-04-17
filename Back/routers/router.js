@@ -1,14 +1,15 @@
 import express from "express";
-import { addFunc, listarFunc, apagarFunc, editarFunc,addEpis ,listarEpi} from '../controllers/controller.js'
+import { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi, relatorio } from '../controllers/controller.js'
 const router = express.Router()
 
-router.post("/funcionario",addFunc) 
-router.get("/funcionario",listarFunc) 
-router.delete("/funcionario",apagarFunc) 
-router.put("/funcionario",editarFunc)
+router.post("/addFunc", addFunc)
+router.post("/listarFunc", listarFunc)
+router.put("/editarFunc", editarFunc)
+router.delete("/apagarFunc", apagarFunc)
 
-router.post("/epi",addEpis) 
-router.post("/listarEpi",listarEpi) 
+router.post("/epi", addEpis)
+router.post("/listarEpi", listarEpi)
+router.post("/relatorio", relatorio)
 
 export default router
 

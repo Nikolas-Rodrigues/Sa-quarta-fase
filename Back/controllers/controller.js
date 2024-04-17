@@ -1,13 +1,14 @@
 import Epis from "../models/epis.js";
-import Funcionario from "../models/epis.js";
-
+import Funcionario from "../models/Funcionarios.js";
+import Relatorios from "../models/Relatorios.js";
 const addFunc = async (req, res) => {
-   
+
+    console.log("addFunc")
     try {
         const { nome, cpf, cargo } = req.body
         if (!nome || !cpf || !cargo) return res.status(404).send({ mensagem: 'Informações incompletas' })
-        const epiCadastrado = await Funcionario.create({ nome, cpf, cargo })
-        res.status(201).send({ epiCadastrado })
+        const funcCadastrado = await Funcionario.create({ nome, cpf, cargo })
+        res.status(201).send({ funcCadastrado })
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao inserir funcionario' })
@@ -15,12 +16,14 @@ const addFunc = async (req, res) => {
 }
 
 const listarFunc = async (req, res) => {
+    console.log('LISTAR Funcionarios no backend')
     try {
-        const epis = await Funcionario.findAll()
-        res.status(200).send({ epis })
+        const FuncResults = await Funcionario.findAll()
+        res.status(200).send({ FuncResults })
+        console.log(FuncResults)
     } catch (erro) {
         console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao buscar dados' })
+        res.status(404).send({ mensagem: 'Erro ao listar' })
     }
 }
 const apagarFunc = async (req, res) => {
@@ -50,27 +53,47 @@ const addEpis = async (req, res) => {
     try {
         const { nome, codigo, validade } = req.body
         let disponibilidade = false;
-        console.log( nome,codigo, validade)
+        console.log(nome, codigo, validade)
         if (!nome || !codigo || !validade) return res.status(404).send({ mensagem: 'Informações incompletas' })
         const epiCadastrado = await Epis.create({ nome, codigo, validade, disponibilidade })
         res.status(201).send({ epiCadastrado })
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao inserir epi' })
+    }
+}
+
+const listarEpi = async (req, res) => {
+    console.log('LISTAR EPI no backend')
+    try {
+        const episResults = await Epis.findAll()
+        res.status(200).send({ episResults })
+        console.log(episResults)
+
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar' })
+    }
+}
+
+
+const relatorio = async (req, res) => {
+
+    console.log("Relatorio Adicionado")
+    try {
+        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao) return res.status(404).send({ mensagem: 'Informações incompletas' })
+        const funcRelatorios = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
+        res.status(201).send({ funcRelatorios })
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao inserir funcionario' })
     }
 }
 
-    const listarEpi = async (req, res) => {
-        console.log('LISTAR EPI no backend')
-        try {
-            const episResults = await Epis.findAll()
-            res.status(200).send({ episResults })
-            console.log(episResults)
-            
-        } catch (erro) {
-            console.log(erro)
-            res.status(404).send({ mensagem: 'Erro ao listar' })
-        }
-    }
 
-export { addFunc, listarFunc, apagarFunc, editarFunc ,addEpis, listarEpi}
+
+
+
+
+export { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi, relatorio }
