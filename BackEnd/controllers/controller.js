@@ -2,6 +2,7 @@ import Funcionario from "../models/Funcionarios.js";
 
 const addFunc = async (req, res) => {
     try {
+        console.log("Chegou")
         const { nome, cpf, cargo } = req.body
         if (!nome || !cpf || !cargo) return res.status(404).send({ mensagem: 'Informações incompletas' })
         const funcCadastrado = await Funcionario.create({ nome, cpf, cargo })
@@ -15,6 +16,7 @@ const addFunc = async (req, res) => {
 const listarFunc = async (req, res) => {
     try {
         const funcionarios = await Funcionario.findAll()
+        console.log(funcionarios)
         res.status(200).send({ funcionarios })
     } catch (erro) {
         console.log(erro)
@@ -23,14 +25,19 @@ const listarFunc = async (req, res) => {
 }
 const apagarFunc = async (req, res) => {
     try {
-        const { id } = req.body
+        const {id} = req.body
         await Funcionario.destroy({ where: { id } })
-        res.status(200).send({ mensagem: 'excluido' })
+        res.status(200).send({ mensagem: "Concluido" })
     } catch (erro) {
         console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao apagar' })
+        res.status(404).send({ mensagem: "Erro ao deletar dado" })
     }
 }
+
+
+
+
+
 
 const editarFunc = async (req, res) => {
     try {
