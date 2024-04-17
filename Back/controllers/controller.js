@@ -74,4 +74,3 @@ const addEpis = async (req, res) => {
     }
 
 export { addFunc, listarFunc, apagarFunc, editarFunc ,addEpis, listarEpi}
-
