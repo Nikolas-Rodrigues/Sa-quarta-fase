@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
@@ -10,6 +10,21 @@ function Epi() {
   const [codigo, setCodigo] = useState(null)
   const [validade, setValidade] = useState(null)
   const [nome, setNome] = useState(null)
+  const [epi, setEpis] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.post(`${host}/listarEpi`);
+        setEpis(response.data.episResults);
+        console.log(response.data.episResults)
+      } catch (error) {
+        console.error('Erro ao obter dados do backend:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   function cadastrar() {
     let btnCadastrar = document.getElementById("btnCadastrar");
@@ -33,7 +48,7 @@ function Epi() {
     excluirEpi.style.display = "none";
     editarEpi.style.display = "none";
   }
-  
+
   function listar() {
     let btnCadastrar = document.getElementById("btnCadastrar");
     let btnListar = document.getElementById("btnListar");
@@ -106,8 +121,12 @@ function Epi() {
 
   function adicionar() {
     console.log(nome, codigo, validade)
+    if (nome == null || codigo == null || validade == null) {
+      alert("Faltando dados!")
+      return;
+    } 
     let disponibilidade = false
-    const dados = { nome, codigo, validade ,disponibilidade}
+    const dados = { nome, codigo, validade, disponibilidade }
     axios.post(`${host}/epi`, dados)
     alert('Salvo com sucesso!');
     document.getElementById("adicionarEpiNome").value = '';
@@ -117,70 +136,73 @@ function Epi() {
 
   function listarBackend() {
     console.log('LISTANDO...')
-    axios.post(`${host}/listarEpi`, )
+
+    axios.post(`${host}/listarEpi`)
+   
   }
   return (
     <>
       <div className='index'>
-      <Link to={"/"}>
+        <Link to={"/"}>
           <h1> Epis</h1>
         </Link >
 
-          <div className='navApiGeral'>
-            <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
+        <div className='navApiGeral'>
+          <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
 
-            <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
-            <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
-            <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
-          </div>
-          <div className='content'>
+          <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
+          <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
+          <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
+        </div>
+        <div className='content'>
 
-            <div className='cadastroEpi' id="cadastrarEpi">
+          <div className='cadastroEpi' id="cadastrarEpi">
 
-              <div className='cadastro-epi-div'>
-                <h2>Nome do Equipamento: </h2>
-                <input id="adicionarEpiNome" onChange={(evento) => setNome(evento.target.value)} />
-              </div>
+            <div className='cadastro-epi-div'>
+              <h2>Nome do Equipamento: </h2>
+              <input id="adicionarEpiNome" onChange={(evento) => setNome(evento.target.value)} />
+            </div>
 
-              <div>
-                <h2>Codigo do Equipamento</h2>
-                <input id="adicionarEpiCodigo" onChange={(evento) => setCodigo(evento.target.value)} />
-              </div>
+            <div>
+              <h2>Codigo do Equipamento</h2>
+              <input id="adicionarEpiCodigo" onChange={(evento) => setCodigo(evento.target.value)} />
+            </div>
 
-              <div>
-                <h2>Validade</h2>
-                <input type='date' id="adicionarEpiValidade" onChange={(evento) => setValidade(evento.target.value)} />
-              </div>
-              <button className='adicionarEpi' onClick={adicionar}>
+            <div>
+              <h2>Validade</h2>
+              <input type='date' id="adicionarEpiValidade" onChange={(evento) => setValidade(evento.target.value)} />
+            </div>
+            <button className='adicionarEpi' onClick={adicionar}>
               <span>Adicionar</span>
             </button>
-            </div>
-
-            <div className='listarEpi' id="listarEpi">
-              <h1>Listar</h1>
-              <input name="" />
-              <button>
-                <span>Listar</span>
-              </button>
-            </div>
-
-            <div className='editarEpi' id="editarEpi">
-              <h1>Editar</h1>
-              <input name="" />
-              <button>
-                <span>Editar</span>
-              </button>
-            </div>
-
-            <div className='excluirEpi' id="excluirEpi">
-              <h1>Excluir</h1>
-              <input name="" />
-              <button>
-                <span>Apagar</span>
-              </button>
-            </div>
-
           </div>
+
+          <div className='listarEpi' id="listarEpi">
+            <h1>Listar</h1>
+            <ul>
+        {epi.map(epi => (
+          <li key={epi.id}>{epi.id}     {epi.nome} {epi.validade} {epi.disponibilidade}</li> 
+        ))}
+      </ul>
+          </div>
+
+          <div className='editarEpi' id="editarEpi">
+            <h1>Editar</h1>
+            <input name="" />
+            <button>
+              <span>Editar</span>
+            </button>
+          </div>
+
+          <div className='excluirEpi' id="excluirEpi">
+            <h1>Excluir</h1>
+            <input name="" />
+            <button>
+              <span>Apagar</span>
+            </button>
+          </div>
+
+        </div>
       </div>
     </>
   )

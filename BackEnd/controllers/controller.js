@@ -2,8 +2,7 @@ import Epis from "../models/epis.js";
 import Funcionario from "../models/epis.js";
 
 const addFunc = async (req, res) => {
-    console.log('BE')
-    console.log(nome, cpf, cargo)
+   
     try {
         const { nome, cpf, cargo } = req.body
         if (!nome || !cpf || !cargo) return res.status(404).send({ mensagem: 'Informações incompletas' })
@@ -61,16 +60,18 @@ const addEpis = async (req, res) => {
     }
 }
 
-const listarEpi = async (req, res) => {
-     console.log('LISTAR EPI')
-    try {
-        const epis = await Funcionario.findAll()
-        res.status(200).send({ epis })
-    } catch (erro) {
-        console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao listar' })
+    const listarEpi = async (req, res) => {
+        console.log('LISTAR EPI no backend')
+        try {
+            const episResults = await Epis.findAll()
+            res.status(200).send({ episResults })
+            console.log(episResults)
+            
+        } catch (erro) {
+            console.log(erro)
+            res.status(404).send({ mensagem: 'Erro ao listar' })
+        }
     }
-}
 
 export { addFunc, listarFunc, apagarFunc, editarFunc ,addEpis, listarEpi}
 
