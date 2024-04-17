@@ -57,11 +57,13 @@ function Func() {
     else {
       alert("Falha ao remover funcionario")
     }
+
+
+    
     let data = JSON.stringify({
       id: id,
 
     });
-
     let config = {
       method: 'delete',
       url: " http://localhost:3000/funcionario",
