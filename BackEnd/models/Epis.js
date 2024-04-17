@@ -1,4 +1,4 @@
-import sequelize from "../database.js"
+import sequelize from "../dataBase/database.js"
 import { DataTypes } from "sequelize"
 
 const Epis = sequelize.define('Epis', {
@@ -12,7 +12,7 @@ const Epis = sequelize.define('Epis', {
         type: DataTypes.INTEGER
     },
     validade: {
-        type: DataTypes.DataTypes
+        type: DataTypes.DATE
     },
     nome: {
         type: DataTypes.STRING
@@ -20,6 +20,6 @@ const Epis = sequelize.define('Epis', {
     disponibilidade: {
         type: DataTypes.BOOLEAN
     },
-}, {tableName: 'epis'})
+}, {tableName: 'Epis'})
 
 export default Epis 
