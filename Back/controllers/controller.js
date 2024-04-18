@@ -96,42 +96,38 @@ const apagarEpi = async (req, res) => {
         res.status(404).send({ mensagem: 'Erro ao apagar' })
     }
 }
-const relatorio = async (res, req) => {
-    const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
-    let ExisteEpi = true
-    let idVerificar = IdEpi
+const relatorio = async (req, res) => {
+    const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
+    let ExisteEpi = true;
+    let idVerificar = IdEpi;
 
-    console.log('Buscar Para Verificação')
+    console.log('Buscar Para Verificação');
     try {
-        const validade = await Epis.findOne({ where: { id: idVerificar } });
-        if (validade == null) {
-            ExisteEpi = false
-        }
-        else {
-            ExisteEpi = true
-            res.status(200).send({ validade })
+
+        const epis = await Epis.findOne({ where: { id: idVerificar } });
+        if (!epis) {
+            ExisteEpi = false;
         }
     } catch (erro) {
-        console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao buscar' })
+        console.log(erro);
+        return res.status(404).send({ mensagem: 'Erro ao buscar' });
     }
 
-
-    console.log(ExisteEpi)
-
+    console.log(ExisteEpi);
 
     try {
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao && ExisteEpi == false)
-            return res.status(404).send({ mensagem: 'Dados incorretos' })
-        const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
-        res.status(201).send({ registrado })
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !ExisteEpi) {
+            return res.status(404).send({ mensagem: 'Dados incorretos' });
+        }
+
+        const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
+        res.status(201).send({ registrado });
     } catch (erro) {
-        console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao inserir relatorio' })
+        console.log(erro);
+        res.status(404).send({ mensagem: 'Erro ao inserir relatorio' });
     }
-
-}
-
+};
 
 
-export { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi, relatorio, editarEpi, apagarEpi}
+
+export { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi, relatorio, editarEpi, apagarEpi }
