@@ -16,7 +16,6 @@ function Func() {
       try {
         const response = await axios.post(`${host}/listarFunc`);
         setFuncs(response.data.FuncResults);
-        console.table(response.data.FuncResults);
       } catch (error) {
         console.error('Erro ao obter dados do backend:', error);
       }
@@ -30,7 +29,6 @@ function Func() {
     console.log(nome, cpf, cargo)
     if (nome == null || cpf == null || cargo == null) {
       alert("Faltando dados!")
-      return;
     }
     const dados = { nome, cpf, cargo }
     axios.post(`${host}/addFunc`, dados)

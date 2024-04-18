@@ -5,11 +5,11 @@ import router from "./routers/router.js"
 const port = 3000;
 const app = express();
 
-try {
-    await sequelize.sync({})
-} catch (erro) {
-    console.log(erro)
-}
+// try {
+//     await sequelize.sync({})
+// } catch (erro) {
+//     console.log(erro)
+// }
 
 app.use(cors());
 

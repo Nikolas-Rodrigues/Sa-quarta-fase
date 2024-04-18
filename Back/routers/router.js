@@ -10,6 +10,7 @@ router.delete("/apagarFunc", apagarFunc)
 router.post("/epi", addEpis)
 router.post("/listarEpi", listarEpi)
 router.post("/relatorio", relatorio)
+router.post("/validade", relatorio)
 
 export default router
 

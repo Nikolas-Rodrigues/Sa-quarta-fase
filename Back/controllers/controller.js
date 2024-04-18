@@ -1,4 +1,5 @@
-import Epis from "../models/epis.js";
+import { ValidationError } from 'sequelize';
+import Epis from '../models/Epis.js'
 import Funcionario from "../models/Funcionarios.js";
 import Relatorios from "../models/Relatorios.js";
 const addFunc = async (req, res) => {
@@ -76,19 +77,40 @@ const listarEpi = async (req, res) => {
     }
 }
 
+const relatorio = async (res, req) => {
+    const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
+    let ExisteEpi = true
+    let idVerificar = IdEpi
 
-const relatorio = async (req, res) => {
+    // console.log('Buscar Para Verificação')
+    // try {
+    //     const validade = await Epis.findOne({ where: { id: idVerificar } });
+    //     if (validade == null) {
+    //         ExisteEpi = false
+    //     }
+    //     else {
+    //         ExisteEpi = true
+    //         res.status(200).send({ validade })
+    //     }
+    // } catch (erro) {
+    //     console.log(erro)
+    //     res.status(404).send({ mensagem: 'Erro ao buscar' })
+    // }
 
-    console.log("Relatorio Adicionado")
+
+    console.log(ExisteEpi)
+
+
     try {
-        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao) return res.status(404).send({ mensagem: 'Informações incompletas' })
-        const funcRelatorios = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
-        res.status(201).send({ funcRelatorios })
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao && ExisteEpi == false)
+            return res.status(404).send({ mensagem: 'Dados incorretos' })
+        const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
+        res.status(201).send({ registrado })
     } catch (erro) {
         console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao inserir funcionario' })
+        res.status(404).send({ mensagem: 'Erro ao inserir relatorio' })
     }
+
 }
 
 

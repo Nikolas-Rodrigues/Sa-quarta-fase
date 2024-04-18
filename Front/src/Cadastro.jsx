@@ -11,32 +11,25 @@ function Cadastro() {
   const [IdEpi, setIdEpi] = useState(null)
   const [Retirada, setRetirada] = useState(null)
   const [Devolucao, setDevolucao] = useState(null)
+  const [mensagem, setMensagem] = useState("a")
 
 
-
-  function addRelatorio() {
-    const dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
-
+  async function addRelatorio() {
+    let dados = { IdFuncionario, IdEpi, Retirada, Devolucao }
     if (Retirada >= Devolucao) {
-      alert("Retirada após devolução é inválida");
-    } else {
-      axios.post(`${host}/relatorio`, dados)
-        .then(() => {
-          alert("Registro feito com sucesso");
-          document.getElementById("RegistrarIdFunc").value = null;
-          document.getElementById("RegistrarIdEpi").value = null;
-          document.getElementById("RegistrarEpiRetirada").value = null;
-          document.getElementById("RegistrarEpiDevolucao").value = null;
-        })
-        .catch(error => {
-          console.error("Erro ao adicionar relatório:", error);
-          alert("Erro ao adicionar relatório");
-        });
+      alert("Data invalida")
+    }
+    else {
+      const validade = await axios.post(`${host}/validade`, dados)
+      const resposta = await axios.post(`${host}/relatorio`, dados)
+      document.getElementById("RegistrarIdEpi").value = '';
+      document.getElementById("RegistrarIdFunc").value = '';
+      document.getElementById("RegistrarEpiRetirada").value = '';
+      document.getElementById("RegistrarEpiDevolucao").value = '';
+      setMensagem(resposta)
+      alert("Dados inseridos")
     }
   }
-
-
-
 
   return (
     <>
