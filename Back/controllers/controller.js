@@ -98,25 +98,38 @@ const apagarEpi = async (req, res) => {
 }
 const relatorio = async (req, res) => {
     const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
-    let ExisteEpi = true;
-    let idVerificar = IdEpi;
-
+    let existe = true;
+    let idVerificarEpi = IdEpi;
+    let idVerificarFunc = IdFuncionario
     console.log('Buscar Para Verificação');
+
+
+
     try {
 
-        const epis = await Epis.findOne({ where: { id: idVerificar } });
+        const epis = await Epis.findOne({ where: { id: idVerificarEpi } });
         if (!epis) {
-            ExisteEpi = false;
+            existe = false;
         }
     } catch (erro) {
         console.log(erro);
-        return res.status(404).send({ mensagem: 'Erro ao buscar' });
+        return res.status(404).send({ mensagem: 'Erro ao buscar Epi' });
     }
 
-    console.log(ExisteEpi);
+    try {
+        const funcionario = await Funcionario.findOne({ where: { id: idVerificarFunc } });
+        if (!funcionario) {
+            existe = false;
+        }
+    } catch (erro) {
+        console.log(erro);
+        return res.status(404).send({ mensagem: 'Erro ao buscar Funcionario' });
+    }
+
+    console.log(existe);
 
     try {
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !ExisteEpi) {
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe) {
             return res.status(404).send({ mensagem: 'Dados incorretos' });
         }
 
@@ -130,4 +143,4 @@ const relatorio = async (req, res) => {
 
 
 
-export { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi, relatorio, editarEpi, apagarEpi }
+export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, relatorio }

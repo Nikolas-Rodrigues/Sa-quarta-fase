@@ -7,28 +7,27 @@ const host = "http://localhost:3000"
 
 function Cadastro() {
 
-  const [IdFuncionario, setIdFuncionario] = useState(null)
-  const [IdEpi, setIdEpi] = useState(null)
-  const [Retirada, setRetirada] = useState(null)
-  const [Devolucao, setDevolucao] = useState(null)
-  const [mensagem, setMensagem] = useState("a")
+  const [IdFuncionario, setIdFuncionario] = useState('')
+  const [IdEpi, setIdEpi] = useState('')
+  const [Retirada, setRetirada] = useState('')
+  const [Devolucao, setDevolucao] = useState('')
 
 
   async function addRelatorio() {
     let dados = { IdFuncionario, IdEpi, Retirada, Devolucao }
-    if (Retirada >= Devolucao) {
-      alert("Data invalida")
+    let resposta = null
+    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '') {
+      alert("Dados invalidos")
     }
     else {
-      const validade = await axios.post(`${host}/validade`, dados)
-      const resposta = await axios.post(`${host}/relatorio`, dados)
+      resposta = await axios.post(`${host}/relatorio`, dados)
       document.getElementById("RegistrarIdEpi").value = '';
       document.getElementById("RegistrarIdFunc").value = '';
       document.getElementById("RegistrarEpiRetirada").value = '';
       document.getElementById("RegistrarEpiDevolucao").value = '';
-      setMensagem(resposta)
-      alert("Dados inseridos")
+      alert("Dados inseridos com sucesso")
     }
+    console.log(resposta)
   }
 
   return (

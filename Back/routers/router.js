@@ -13,7 +13,6 @@ router.put("/editarEpi", editarEpi)
 router.delete("/apagarEpi", apagarEpi)
 
 router.post("/relatorio", relatorio)
-router.post("/validade", relatorio)
 
 
 
