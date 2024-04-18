@@ -140,6 +140,62 @@ function Epi() {
     axios.post(`${host}/listarEpi`)
    
   }
+
+  function editarBackend() {
+    const dadosEdit = { id,nome, codigo, validade}
+    
+    axios.put(`${host}/editarEpi`, dadosEdit)
+    if (nome != null && codigo != null && validade != null && id != null) {
+      alert("Epis editado com sucesso")
+    } else {
+      alert("Erro ao editado Epis")
+      return;
+    }
+    
+    document.getElementById("editarValidade").value = '';
+    document.getElementById("editarCodigo").value = '';
+    document.getElementById("editarNome").value = '';
+    document.getElementById("editarId").value = '';
+
+  }
+
+  function removerBackend() {
+
+    if(id > epi.length) {
+     alert('ID INVALIDO!')
+    } else {
+      document.getElementById("apagarEpi").value = '';
+      if (id != null) {
+        alert("Epi removido com sucesso")
+      }
+      else {
+        alert("Falha ao remover Epi")
+      }
+  
+      let data = JSON.stringify({
+        id: id,
+  
+      });
+      let config = {
+        method: 'delete',
+        url: " http://localhost:3000/apagarEpi",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: data
+      }
+      axios.request(config)
+        .then((response) => {
+          console.log(response.data);
+  
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    
+  }
+
   return (
     <>
       <div className='index'>
@@ -187,17 +243,34 @@ function Epi() {
           </div>
 
           <div className='editarEpi' id="editarEpi">
-            <h1>Editar</h1>
-            <input name="" />
-            <button>
-              <span>Editar</span>
+          <div>
+              <h2>Id a modificar: </h2>
+              <input type='number' id='editarId' onChange={(evento) => setId(evento.target.value)} />
+            </div>
+
+            <div>
+              <h2>Nome do equipamento: </h2>
+              <input type='text' id='editarNome' onChange={(evento) => setNome(evento.target.value)} />
+            </div>
+
+            <div>
+              <h2>codigo:</h2>
+              <input type='text' id='editarCodigo' onChange={(evento) => setCodigo(evento.target.value)} />
+            </div>
+
+            <div>
+              <h2>Validade:</h2>
+              <input type='date' id='editarValidade' onChange={(evento) => setValidade(evento.target.value)} />
+            </div>
+            <button className='alterarEpi' onClick={editarBackend}>
+              <span>Alterar</span>
             </button>
           </div>
 
           <div className='excluirEpi' id="excluirEpi">
-            <h1>Excluir</h1>
-            <input name="" />
-            <button>
+          <h1>Excluir</h1>
+            <input type='number' id="apagarEpi" onChange={(evento) => setId(evento.target.value)} />
+            <button onClick={removerBackend}>
               <span>Apagar</span>
             </button>
           </div>
