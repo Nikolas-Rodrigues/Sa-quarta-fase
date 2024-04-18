@@ -49,7 +49,7 @@ const editarFunc = async (req, res) => {
 const addEpis = async (req, res) => {
     try {
         const { nome, codigo, validade } = req.body
-        let disponibilidade = false;
+        let disponibilidade = true;
 
         if (!nome || !codigo || !validade) return res.status(404).send({ mensagem: 'Informações incompletas' })
         const epiCadastrado = await Epis.create({ nome, codigo, validade, disponibilidade })
@@ -97,47 +97,32 @@ const apagarEpi = async (req, res) => {
     }
 }
 const relatorio = async (req, res) => {
-    const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
-    let existe = true;
-    let idVerificarEpi = IdEpi;
-    let idVerificarFunc = IdFuncionario
-    console.log('Buscar Para Verificação');
-
-
-
     try {
-
-        const epis = await Epis.findOne({ where: { id: idVerificarEpi } });
-        if (!epis) {
+        let epis = null
+        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
+        let existe = true;
+        console.log('Buscar Para Verificação');
+        let disponivel = false
+        epis = await Epis.findOne({ where: { id: IdEpi } });
+        const funcionario = await Funcionario.findOne({ where: { id: IdFuncionario } });
+        if (!epis || !funcionario) {
             existe = false;
         }
-    } catch (erro) {
-        console.log(erro);
-        return res.status(404).send({ mensagem: 'Erro ao buscar Epi' });
-    }
-
-    try {
-        const funcionario = await Funcionario.findOne({ where: { id: idVerificarFunc } });
-        if (!funcionario) {
-            existe = false;
+        console.log(epis.disponibilidade)
+        if (epis.disponibilidade == true) {
+            disponivel = true
         }
-    } catch (erro) {
-        console.log(erro);
-        return res.status(404).send({ mensagem: 'Erro ao buscar Funcionario' });
-    }
-
-    console.log(existe);
-
-    try {
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe) {
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe || disponivel == false) {
             return res.status(404).send({ mensagem: 'Dados incorretos' });
         }
-
         const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
-        res.status(201).send({ registrado });
+        const disponibilidade = false
+        const apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: IdEpi } })
+        console.log(apiAtuaizado)
+        return res.status(200).send({ apiAtuaizado })
     } catch (erro) {
         console.log(erro);
-        res.status(404).send({ mensagem: 'Erro ao inserir relatorio' });
+        return res.status(404).send({ mensagem: 'Erro ao inserir relatorio' });
     }
 };
 

@@ -124,7 +124,7 @@ function Epi() {
     if (nome == null || codigo == null || validade == null) {
       alert("Faltando dados!")
       return;
-    } 
+    }
     let disponibilidade = false
     const dados = { nome, codigo, validade, disponibilidade }
     axios.post(`${host}/epi`, dados)
@@ -138,12 +138,12 @@ function Epi() {
     console.log('LISTANDO...')
 
     axios.post(`${host}/listarEpi`)
-   
+
   }
 
   function editarBackend() {
-    const dadosEdit = { id,nome, codigo, validade}
-    
+    const dadosEdit = { id, nome, codigo, validade }
+
     axios.put(`${host}/editarEpi`, dadosEdit)
     if (nome != null && codigo != null && validade != null && id != null) {
       alert("Epis editado com sucesso")
@@ -151,7 +151,7 @@ function Epi() {
       alert("Erro ao editado Epis")
       return;
     }
-    
+
     document.getElementById("editarValidade").value = '';
     document.getElementById("editarCodigo").value = '';
     document.getElementById("editarNome").value = '';
@@ -161,8 +161,8 @@ function Epi() {
 
   function removerBackend() {
 
-    if(id > epi.length) {
-     alert('ID INVALIDO!')
+    if (id > epi.length) {
+      alert('ID INVALIDO!')
     } else {
       document.getElementById("apagarEpi").value = '';
       if (id != null) {
@@ -171,10 +171,10 @@ function Epi() {
       else {
         alert("Falha ao remover Epi")
       }
-  
+
       let data = JSON.stringify({
         id: id,
-  
+
       });
       let config = {
         method: 'delete',
@@ -187,13 +187,13 @@ function Epi() {
       axios.request(config)
         .then((response) => {
           console.log(response.data);
-  
+
         })
         .catch((error) => {
           console.log(error);
         });
     }
-    
+
   }
 
   return (
@@ -205,7 +205,6 @@ function Epi() {
 
         <div className='navApiGeral'>
           <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
-
           <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
           <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
           <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
@@ -234,16 +233,28 @@ function Epi() {
           </div>
 
           <div className='listarEpi' id="listarEpi">
-            <h1>Listar</h1>
-            <ul>
-        {epi.map(epi => (
-          <li key={epi.id}>{epi.id}     {epi.nome} {epi.validade} {epi.disponibilidade}</li> 
-        ))}
-      </ul>
+            <div className='dadosEpi'>
+              <div>ID</div>
+              <div>Nome</div>
+              <div>Validade</div>
+              <div>Disponibilidade</div>
+            </div>
+            <ul className='listar1'>
+              {epi.map(epi => (
+                <li key={epi.id}>
+                  <div className='organizar1'>
+                    <div className='epiId'>{epi.id}</div>
+                    <div className='epiNome'>{epi.nome}</div>
+                    <div className='epiValidade'>{epi.validade}</div>
+                    <div className='epiDisponibilidade'>{epi.disponibilidade}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className='editarEpi' id="editarEpi">
-          <div>
+            <div>
               <h2>Id a modificar: </h2>
               <input type='number' id='editarId' onChange={(evento) => setId(evento.target.value)} />
             </div>
@@ -268,7 +279,7 @@ function Epi() {
           </div>
 
           <div className='excluirEpi' id="excluirEpi">
-          <h1>Excluir</h1>
+            <h1>Excluir</h1>
             <input type='number' id="apagarEpi" onChange={(evento) => setId(evento.target.value)} />
             <button onClick={removerBackend}>
               <span>Apagar</span>
