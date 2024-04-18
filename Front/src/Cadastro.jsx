@@ -14,21 +14,30 @@ function Cadastro() {
 
 
   async function addRelatorio() {
-    let dados = { IdFuncionario, IdEpi, Retirada, Devolucao }
-    let resposta = null
-    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '') {
-      alert("Dados invalidos")
-    }
-    else {
-      resposta = await axios.post(`${host}/relatorio`, dados)
+    let dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
+    let resposta = null;
+
+    try {
+      if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '') {
+        alert("Dados inválidos");
+      } else {
+        resposta = await axios.post(`${host}/relatorio`, dados);
+        document.getElementById("RegistrarIdEpi").value = '';
+        document.getElementById("RegistrarIdFunc").value = '';
+        document.getElementById("RegistrarEpiRetirada").value = '';
+        document.getElementById("RegistrarEpiDevolucao").value = '';
+        alert("Dados inseridos com sucesso");
+      }
+    } catch (error) {
+      console.error('Erro ao enviar relatório:', error);
+      alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
       document.getElementById("RegistrarIdEpi").value = '';
       document.getElementById("RegistrarIdFunc").value = '';
       document.getElementById("RegistrarEpiRetirada").value = '';
       document.getElementById("RegistrarEpiDevolucao").value = '';
-      alert("Dados inseridos com sucesso")
     }
-    console.log(resposta)
   }
+
 
   return (
     <>
