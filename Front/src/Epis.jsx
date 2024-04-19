@@ -2,6 +2,7 @@ import './Home.css'
 import { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import {format} from 'date-fns';
 const host = "http://localhost:3000"
 
 
@@ -16,8 +17,24 @@ function Epi() {
     async function fetchData() {
       try {
         const response = await axios.post(`${host}/listarEpi`);
+         console.log(response.data.episResults)
+         let epiResults = response.data.episResults;
+
+         epiResults.forEach((item) =>{ 
+          if(item.disponibilidade == true){
+            item.disponibilidade = "Sim";
+          }else {
+            item.disponibilidade = "Não";
+          }
+        })
+
+        epiResults.forEach((item) =>{ 
+   
+          item.validade = format(new Date(item.validade), 'dd/mm/yyyy');
+        })
+        console.log(epiResults)
         setEpis(response.data.episResults);
-        console.log(response.data.episResults)
+       
       } catch (error) {
         console.error('Erro ao obter dados do backend:', error);
       }
@@ -71,7 +88,6 @@ function Epi() {
     excluirEpi.style.display = "none";
     editarEpi.style.display = "none";
 
-    listarBackend();
   }
 
   function editar() {
@@ -132,11 +148,7 @@ function Epi() {
     window.location.reload()
   }
 
-  function listarBackend() {
-    console.log('LISTANDO...')
-    axios.post(`${host}/listarEpi`)
-
-  }
+ 
 
   function editarBackend() {
     const dadosEdit = { id, nome, codigo, validade }

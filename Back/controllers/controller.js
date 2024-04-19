@@ -52,7 +52,7 @@ const addEpis = async (req, res) => {
         let disponibilidade = true;
 
         if (!nome || !codigo || !validade) return res.status(404).send({ mensagem: 'Informações incompletas' })
-        const epiCadastrado = await Epis.create({ id,nome, codigo, validade, disponibilidade })
+        const epiCadastrado = await Epis.create({ nome, codigo, validade, disponibilidade })
         res.status(201).send({ epiCadastrado })
     } catch (erro) {
         console.log(erro)
@@ -117,7 +117,7 @@ const relatorio = async (req, res) => {
         if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe || disponivel == "nao") {
             return res.status(404).send({ mensagem: 'Dados incorretos' });
         }
-        const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
+        await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
         const disponibilidade = false
         const apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: IdEpi } })
         console.log(apiAtuaizado)
