@@ -10,7 +10,7 @@ router.delete("/apagarFunc", apagarFunc)
 router.post("/epi", addEpis)
 router.post("/listarEpi", listarEpi)
 router.put("/editarEpi", editarEpi)
-router.delete("/apagarEpi", apagarEpi)
+router.delete("/apagarEpi/:id", apagarEpi)
 
 router.post("/relatorio", relatorio)
 

@@ -6,7 +6,7 @@ const port = 3000;
 const app = express();
 
 // try {
-//     await sequelize.sync({})
+//     await sequelize.sync()
 // } catch (erro) {
 //     console.log(erro)
 // }
