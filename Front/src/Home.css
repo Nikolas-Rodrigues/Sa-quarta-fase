@@ -207,8 +207,17 @@ h1 {
   margin-right: auto;
 }
 
+.organizar1 {
+  display: flex;
+  list-style: none;
+}
 
-.dadosEpi {
+.organizar div{
+  width: 25%;
+}
+
+.dadosEpi,
+.listar {
   display: flex;
 }
 
@@ -227,27 +236,11 @@ h1 {
 }
 
 .organizar1 div {
-  width: 25%;
+
   text-align: center;
   padding-bottom: 10px;
 }
 
-.epiId {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiNome {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiValidade {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiDisponibilidade {
-  margin-left: auto;
-  margin-right: auto;
+.epiCenter{
+  margin: auto;
 }
