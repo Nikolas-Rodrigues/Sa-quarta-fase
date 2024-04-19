@@ -234,12 +234,24 @@ function Epi() {
           </div>
 
           <div className='listarEpi' id="listarEpi">
-            <h1>Listar</h1>
-            <ul>
-        {epi.map(epi => (
-          <li key={epi.id}>{epi.id}     {epi.nome} {epi.validade} {epi.disponibilidade}</li> 
-        ))}
-      </ul>
+            <div className='dadosEpi'>
+            <div>ID</div>
+            <div>Nome</div>
+            <div>Validade</div>
+            <div>Disponibilidade</div>
+            </div>
+            <ul className='listar1'>
+              {epi.map(epi => (
+                <li key={epi.id}>
+                  <div className='organizar1'>
+                    <div className='epiId'>{epi.id}</div>
+                    <div className='epiNome'>{epi.nome}</div>
+                    <div className='epiValidade'>{epi.validade}</div>
+                    <div className='epiDisponibilidade'>{epi.disponibilidade}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className='editarEpi' id="editarEpi">
