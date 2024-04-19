@@ -60,6 +60,8 @@ h1 {
 
 
 .adicionarEpi,
+.alterarEpi,
+.apagarEpi,
 .adicionarFunc {
   color: white;
   margin-top: 5%;
@@ -102,7 +104,6 @@ h1 {
 .navApiGeral,
 .navFuncGeral {
   margin-left: 25px;
-  position: relative;
 }
 
 .navApi,
@@ -121,31 +122,29 @@ h1 {
   cursor: pointer;
   position: absolute;
 
-
 }
 
 .navApi,
 .navFunc {
-  left: -8px;
+  left: 250px;
 }
 
 .navApi2,
 .navFunc2 {
-  left: 100px;
+  left: 350px;
 }
 
 .navApi3,
 .navFunc3 {
-  left: 200px;
+  left: 450px;
 }
 
 .navApi4,
 .navFunc4 {
-  left: 300px;
+  left: 550px;
 }
 
-.navApi,
-.navFunc {
+.navApi, .navFunc {
   background-color: white;
 }
 
@@ -158,7 +157,7 @@ h1 {
   display: none;
 }
 
-
+	
 .todo {
   background-color: rgb(255, 255, 255);
   height: 350px;
@@ -172,6 +171,7 @@ h1 {
   font-size: x-small;
 }
 
+
 .listar {
   list-style-type: none;
   padding: 0px;
@@ -183,8 +183,9 @@ display: flex;
 
 .organizar div {
   width: 25%;
-  text-align: center;
-  padding-bottom: 10px;
+  text-align: start;
+  padding-bottom: 10px; 
+  margin-left: 30px; 
 }
 
 .funcId {
@@ -215,6 +216,8 @@ display: flex;
 .dadosEpi div {
   width: 25%;
   color: rgb(47, 211, 211);
+  text-align: start;
+  margin-left: 30px;
 }
 
 .listar1 {
@@ -228,8 +231,9 @@ display: flex;
 
 .organizar1 div {
   width: 25%;
-  text-align: center;
-  padding-bottom: 10px;
+  text-align: start;
+  padding-bottom: 10px; 
+  margin-left: 30px; 
 }
 
 .epiId {
@@ -250,78 +254,4 @@ display: flex;
 .epiDisponibilidade {
   margin-left: auto;
   margin-right: auto;
-}
-
-
-.listar {
-  list-style-type: none;
-  padding: 0px;
-}
-
-.organizar {
-  display: flex;
-}
-
-.organizar div {
-  width: 25%;
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-.funcId {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.funcNome {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.funcCpf {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.funcCargo {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.organizar1 {
-  display: flex;
-  list-style: none;
-}
-
-.organizar div{
-  width: 25%;
-}
-
-.dadosEpi,
-.listar {
-  display: flex;
-}
-
-.dadosEpi div {
-  width: 25%;
-  color: rgb(47, 211, 211);
-}
-
-.listar1 {
-  list-style-type: none;
-  padding: 0px;
-}
-
-.organizar1 {
-  display: flex;
-}
-
-.organizar1 div {
-
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-.epiCenter{
-  margin: auto;
 }

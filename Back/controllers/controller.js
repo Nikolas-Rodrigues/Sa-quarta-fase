@@ -102,7 +102,7 @@ const relatorio = async (req, res) => {
         const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
         let existe = true;
         console.log('Buscar Para Verificação');
-        let disponivel = false
+        let disponivel = "nao"
         epis = await Epis.findOne({ where: { id: IdEpi } });
         const funcionario = await Funcionario.findOne({ where: { id: IdFuncionario } });
         if (!epis || !funcionario) {
@@ -110,9 +110,9 @@ const relatorio = async (req, res) => {
         }
         console.log(epis.disponibilidade)
         if (epis.disponibilidade == true) {
-            disponivel = true
+            disponivel = "sim"
         }
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe || disponivel == false) {
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe || disponivel == "nao") {
             return res.status(404).send({ mensagem: 'Dados incorretos' });
         }
         const registrado = await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
@@ -125,7 +125,6 @@ const relatorio = async (req, res) => {
         return res.status(404).send({ mensagem: 'Erro ao inserir relatorio' });
     }
 };
-
 
 
 export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, relatorio }
