@@ -52,7 +52,7 @@ const addEpis = async (req, res) => {
         let disponibilidade = true;
 
         if (!nome || !codigo || !validade) return res.status(404).send({ mensagem: 'Informações incompletas' })
-        const epiCadastrado = await Epis.create({ nome, codigo, validade, disponibilidade })
+        const epiCadastrado = await Epis.create({ id,nome, codigo, validade, disponibilidade })
         res.status(201).send({ epiCadastrado })
     } catch (erro) {
         console.log(erro)
@@ -86,9 +86,11 @@ const editarEpi = async (req, res) => {
 }
 
 const apagarEpi = async (req, res) => {
+
     try {
-        const { id } = req.body
-        console.log('aPagando EPI: ', id)
+        const { id } = req.params
+
+        console.log('Apgando EPI: ', id)
         await Epis.destroy({ where: { id } })
         res.status(200).send({ mensagem: 'excluido' })
     } catch (erro) {

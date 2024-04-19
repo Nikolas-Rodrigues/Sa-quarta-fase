@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import './Home.css'
+import { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 const host = "http://localhost:3000"
@@ -129,14 +129,11 @@ function Epi() {
     const dados = { nome, codigo, validade, disponibilidade }
     axios.post(`${host}/epi`, dados)
     alert('Salvo com sucesso!');
-    document.getElementById("adicionarEpiNome").value = '';
-    document.getElementById("adicionarEpiCodigo").value = '';
-    document.getElementById("adicionarEpiValidade").value = '';
+    window.location.reload()
   }
 
   function listarBackend() {
     console.log('LISTANDO...')
-
     axios.post(`${host}/listarEpi`)
 
   }
@@ -151,47 +148,34 @@ function Epi() {
       alert("Erro ao editado Epis")
       return;
     }
-
-    document.getElementById("editarValidade").value = '';
-    document.getElementById("editarCodigo").value = '';
-    document.getElementById("editarNome").value = '';
-    document.getElementById("editarId").value = '';
+ window.location.reload()
 
   }
 
   function removerBackend() {
+    console.log('REMOVER frontend')
+    let achouId = false;
+    epi.forEach((item) => {
+      if (item.id == id) {
+        console.log(`Achou id ${item.id} com ${id}`)
+        achouId = true;
+      }
+    });
 
-    if (id > epi.length) {
-      alert('ID INVALIDO!')
+    if (achouId == false || id == null) {
+      alert("Falha ao remover Epi")
+      return;
     } else {
+      alert("REMOVIDO");
       document.getElementById("apagarEpi").value = '';
-      if (id != null) {
-        alert("Epi removido com sucesso")
+  
+      try {
+        axios.delete(`${host}/apagarEpi/${id}`)
+      } catch(erro) {
+        console.log('ERRO AO APAGAR EPI')
       }
-      else {
-        alert("Falha ao remover Epi")
-      }
-
-      let data = JSON.stringify({
-        id: id,
-
-      });
-      let config = {
-        method: 'delete',
-        url: " http://localhost:3000/apagarEpi",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: data
-      }
-      axios.request(config)
-        .then((response) => {
-          console.log(response.data);
-
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      window.location.reload()
+    
     }
 
   }
