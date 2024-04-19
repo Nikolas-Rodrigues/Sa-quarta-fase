@@ -125,9 +125,8 @@ function Epi() {
       alert("Faltando dados!")
       return;
     }
-    let id = 0;
-    
-    const dados = { id,nome, codigo, validade }
+    let disponibilidade = false
+    const dados = { nome, codigo, validade, disponibilidade }
     axios.post(`${host}/epi`, dados)
     alert('Salvo com sucesso!');
     window.location.reload()
@@ -190,7 +189,6 @@ function Epi() {
 
         <div className='navApiGeral'>
           <button className='navApi' id="btnCadastrar" onClick={cadastrar}>Cadastrar</button>
-
           <button className='navApi2' id="btnListar" onClick={listar}>Listar</button>
           <button className='navApi3' id="btnEditar" onClick={editar}>Editar</button>
           <button className='navApi4' id="btnRemover" onClick={remover}>Remover</button>
@@ -219,10 +217,22 @@ function Epi() {
           </div>
 
           <div className='listarEpi' id="listarEpi">
-            <h1>Listar</h1>
-            <ul>
+            <div className='dadosEpi'>
+            <div>ID</div>
+            <div>Nome</div>
+            <div>Validade</div>
+            <div>Disponibilidade</div>
+            </div>
+            <ul className='listar1'>
               {epi.map(epi => (
-                <li key={epi.id}>{epi.id}     {epi.nome} {epi.validade} {epi.disponibilidade}</li>
+                <li key={epi.id}>
+                  <div className='organizar1'>
+                    <div className='epiId'>{epi.id}</div>
+                    <div className='epiNome'>{epi.nome}</div>
+                    <div className='epiValidade'>{epi.validade}</div>
+                    <div className='epiDisponibilidade'>{epi.disponibilidade}</div>
+                  </div>
+                </li>
               ))}
             </ul>
           </div>

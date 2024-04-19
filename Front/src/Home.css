@@ -102,6 +102,7 @@ h1 {
 .navApiGeral,
 .navFuncGeral {
   margin-left: 25px;
+  position: relative;
 }
 
 .navApi,
@@ -120,29 +121,31 @@ h1 {
   cursor: pointer;
   position: absolute;
 
+
 }
 
 .navApi,
 .navFunc {
-  left: 250px;
+  left: -8px;
 }
 
 .navApi2,
 .navFunc2 {
-  left: 350px;
+  left: 100px;
 }
 
 .navApi3,
 .navFunc3 {
-  left: 450px;
+  left: 200px;
 }
 
 .navApi4,
 .navFunc4 {
-  left: 550px;
+  left: 300px;
 }
 
-.navApi, .navFunc {
+.navApi,
+.navFunc {
   background-color: white;
 }
 
@@ -155,7 +158,7 @@ h1 {
   display: none;
 }
 
-	
+
 .todo {
   background-color: rgb(255, 255, 255);
   height: 350px;
@@ -167,4 +170,158 @@ h1 {
   position: absolute;
   margin: 39px 17px;
   font-size: x-small;
+}
+
+.listar {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar {
+display: flex;
+} 
+
+.organizar div {
+  width: 25%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.funcId {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcNome {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCpf {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCargo {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.dadosEpi {
+  display: flex;
+}
+
+.dadosEpi div {
+  width: 25%;
+  color: rgb(47, 211, 211);
+}
+
+.listar1 {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar1 {
+  display: flex;
+}
+
+.organizar1 div {
+  width: 25%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.epiId {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiNome {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiValidade {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiDisponibilidade {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.listar {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar {
+  display: flex;
+}
+
+.organizar div {
+  width: 25%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.funcId {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcNome {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCpf {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCargo {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.organizar1 {
+  display: flex;
+  list-style: none;
+}
+
+.organizar div{
+  width: 25%;
+}
+
+.dadosEpi,
+.listar {
+  display: flex;
+}
+
+.dadosEpi div {
+  width: 25%;
+  color: rgb(47, 211, 211);
+}
+
+.listar1 {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar1 {
+  display: flex;
+}
+
+.organizar1 div {
+
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.epiCenter{
+  margin: auto;
 }
