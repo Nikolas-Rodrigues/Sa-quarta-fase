@@ -222,11 +222,21 @@ function Func() {
           </div>
 
           <div className='listarFunc' id="listarFunc">
-            <h1>Listar</h1>
-            <ul>
+            <div className='dadosEpi'>
+              <div>ID</div>
+              <div>Nome</div>
+              <div>CPF</div>
+              <div>Cargo</div>
+            </div>
+            <ul className='listar'>
               {funcs.map(func => (
                 <li key={func.id}>
-                  {func.id} - {func.nome} - {func.cpf} - {func.cargo}
+                  <div className='organizar' >
+                    <div className='funcId'>{func.id}</div>
+                    <div className='funcNome'>{func.nome}</div>
+                    <div className='funcCpf'>{func.cpf}</div>
+                    <div className='funcCargo'>{func.cargo}</div>
+                  </div>
                 </li>
               ))}
             </ul>
