@@ -1,0 +1,255 @@
+body {
+  background-image: url("./assets/Fundo.jpg");
+  background-size: cover;
+}
+
+.index {
+  background-color: #5ac7fab7;
+  height: 500px;
+  width: 900px;
+  margin: auto;
+  margin-top: 90px;
+  border-radius: 5%;
+  text-decoration: none;
+
+}
+
+.titulo {
+  padding-top: 30px;
+}
+
+.index .links {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin-top: 100px;
+  padding: 0 40px 0 40px;
+
+}
+
+.lado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  color: #000;
+  text-decoration: none;
+  width: 150px;
+}
+
+.logo-div {
+  text-align: center;
+  margin: auto;
+}
+
+.logo-foto {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  margin-top: 10%;
+
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+
+.adicionarEpi,
+.alterarEpi,
+.apagarEpi,
+.adicionarFunc {
+  color: white;
+  margin-top: 5%;
+  background-color: blue;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.content {
+  background-color: rgb(255, 255, 255);
+  height: 350px;
+  width: 850px;
+  margin: auto;
+  border-radius: 5%;
+  text-align: center;
+
+  z-index: 0;
+  position: absolute;
+  margin: 39px 17px;
+}
+
+.excluir-epi,
+.editar-epi,
+.listar-epi,
+.excluir-func,
+.editar-func,
+.listar-func {
+  display: none;
+}
+
+.content h2 {
+  display: inline-block;
+  padding: 0 25px;
+
+}
+
+
+
+.navApiGeral,
+.navFuncGeral {
+  margin-left: 25px;
+}
+
+.navApi,
+.navApi2,
+.navApi3,
+.navApi4,
+.navFunc,
+.navFunc2,
+.navFunc3,
+.navFunc4 {
+  background-color: darkgray;
+  border: none;
+  height: 60px;
+  width: 80px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: absolute;
+
+}
+
+.navApi,
+.navFunc {
+  left: 250px;
+}
+
+.navApi2,
+.navFunc2 {
+  left: 350px;
+}
+
+.navApi3,
+.navFunc3 {
+  left: 450px;
+}
+
+.navApi4,
+.navFunc4 {
+  left: 550px;
+}
+
+.navApi, .navFunc {
+  background-color: white;
+}
+
+.listarEpi,
+.excluirEpi,
+.editarEpi,
+.listarFunc,
+.excluirFunc,
+.editarFunc {
+  display: none;
+}
+
+	
+.todo {
+  background-color: rgb(255, 255, 255);
+  height: 350px;
+  width: 850px;
+  margin: auto;
+  border-radius: 5%;
+  text-align: center;
+  z-index: 0;
+  position: absolute;
+  margin: 39px 17px;
+  font-size: x-small;
+}
+
+/*Funcionarios*/
+
+.listar {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar {
+display: flex;
+} 
+
+.organizar div {
+  width: 25%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.funcId {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcNome {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCpf {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funcCargo {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*Epi's*/
+
+.dadosEpi {
+  display: flex;
+}
+
+.dadosEpi div {
+  width: 25%;
+  color: rgb(47, 211, 211);
+}
+
+.listar1 {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.organizar1 {
+  display: flex;
+}
+
+.organizar1 div {
+  width: 25%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.epiId {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiNome {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiValidade {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.epiDisponibilidade {
+  margin-left: auto;
+  margin-right: auto;
+}
