@@ -25,8 +25,10 @@ const listarFunc = async (req, res) => {
     }
 }
 const apagarFunc = async (req, res) => {
+    console.log('BACKENDD')
+    debugger
     try {
-        const { id } = req.body
+        const { id } = req.params
         await Funcionario.destroy({ where: { id } })
         res.status(200).send({ mensagem: 'excluido' })
     } catch (erro) {
@@ -89,8 +91,6 @@ const apagarEpi = async (req, res) => {
 
     try {
         const { id } = req.params
-
-        console.log('Apgando EPI: ', id)
         await Epis.destroy({ where: { id } })
         res.status(200).send({ mensagem: 'excluido' })
     } catch (erro) {
@@ -98,35 +98,28 @@ const apagarEpi = async (req, res) => {
         res.status(404).send({ mensagem: 'Erro ao apagar' })
     }
 }
-const relatorio = async (req, res) => {
+const addRelatorio = async (req, res) => {
+    //Para adicionar no relatório
     try {
-        let epis = null
-        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body;
-        let existe = true;
-        console.log('Buscar Para Verificação');
-        let disponivel = "nao"
-        epis = await Epis.findOne({ where: { id: IdEpi } });
-        const funcionario = await Funcionario.findOne({ where: { id: IdFuncionario } });
-        if (!epis || !funcionario) {
-            existe = false;
-        }
-        console.log(epis.disponibilidade)
-        if (epis.disponibilidade == true) {
-            disponivel = "sim"
-        }
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao || !existe || disponivel == "nao") {
-            return res.status(404).send({ mensagem: 'Dados incorretos' });
-        }
-        await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao });
-        const disponibilidade = false
+        const {  IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
+        console.log(`Relatorio : ${IdFuncionario}, ${IdEpi} ...`)
+        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao) return res.status(404).send({ mensagem: 'Informações incompletas' })
+        await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
+    console.log('Cadastrado...')
+    debugger
+    const disponibilidade = false
+    
+    console.log('aLTERANDO...')    
         const apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: IdEpi } })
-        console.log(apiAtuaizado)
-        return res.status(200).send({ apiAtuaizado })
+
+        res.status(201).send({ apiAtuaizado })
     } catch (erro) {
-        console.log(erro);
-        return res.status(404).send({ mensagem: 'Erro ao inserir relatorio' });
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao inserir funcionario' })
     }
+     //Para
+   
 };
 
 
-export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, relatorio }
+export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio }

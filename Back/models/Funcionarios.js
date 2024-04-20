@@ -3,8 +3,7 @@ import { DataTypes } from 'sequelize';
 
 const Funcionario = sequelize.define('Funcionario', {
   id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },

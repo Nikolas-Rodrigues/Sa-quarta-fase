@@ -17,7 +17,6 @@ function Epi() {
     async function fetchData() {
       try {
         const response = await axios.post(`${host}/listarEpi`);
-         console.log(response.data.episResults)
          let epiResults = response.data.episResults;
 
          epiResults.forEach((item) =>{ 
@@ -32,7 +31,6 @@ function Epi() {
    
           item.validade = format(new Date(item.validade), 'dd/mm/yyyy');
         })
-        console.log(epiResults)
         setEpis(response.data.episResults);
        
       } catch (error) {
@@ -136,7 +134,6 @@ function Epi() {
   }
 
   function adicionar() {
-    console.log(nome, codigo, validade)
     if (nome == null || codigo == null || validade == null) {
       alert("Faltando dados!")
       return;
@@ -145,7 +142,7 @@ function Epi() {
     const dados = { nome, codigo, validade, disponibilidade }
     axios.post(`${host}/epi`, dados)
     alert('Salvo com sucesso!');
-    window.location.reload()
+    window.location.reload();
   }
 
  
@@ -165,11 +162,9 @@ function Epi() {
   }
 
   function removerBackend() {
-    console.log('REMOVER frontend')
     let achouId = false;
     epi.forEach((item) => {
       if (item.id == id) {
-        console.log(`Achou id ${item.id} com ${id}`)
         achouId = true;
       }
     });
@@ -179,8 +174,7 @@ function Epi() {
       return;
     } else {
       alert("REMOVIDO");
-      document.getElementById("apagarEpi").value = '';
-  
+   
       try {
         axios.delete(`${host}/apagarEpi/${id}`)
       } catch(erro) {

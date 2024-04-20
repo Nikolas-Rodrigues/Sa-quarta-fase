@@ -26,22 +26,17 @@ function Func() {
 
 
   function adicionar() {//perfeito
-    console.log(nome, cpf, cargo)
     if (nome == null || cpf == null || cargo == null) {
       alert("Faltando dados!")
     }
     const dados = { nome, cpf, cargo }
     axios.post(`${host}/addFunc`, dados)
     alert('Salvo com sucesso!');
-    document.getElementById("adicionarFuncNome").value = '';
-    document.getElementById("adicionarFuncCpf").value = '';
-    document.getElementById("adicionarFuncCargo").value = '';
+    window.location.reload();
   }
 
 
   function editar() {
-
-    console.log(id, nome, cpf, cargo)
     const dadosEdit = { id, nome, cpf, cargo }
     axios.put(`${host}/editarFunc`, dadosEdit)
     document.getElementById("EditarFuncNome").value = '';
@@ -49,48 +44,41 @@ function Func() {
     document.getElementById("EditarFuncCargo").value = '';
     document.getElementById("EditarFuncId").value = '';
     if (nome != null && cpf != null && cargo != null && id != null) {
-      alert("Funcionario editado com sucesso")
+      alert("Funcionario editado com sucesso");
+      window.location.reload();
     } else {
-      alert("Erro ao editado funcionario")
+      alert("Erro ao editado funcionario");
     }
 
 
   }
 
   function apagar() {
-    document.getElementById("apagarFuncId").value = '';
-    if (id != null) {
-      alert("Funcionario removido com sucesso")
-    }
-    else {
-      alert("Falha ao remover funcionario")
-    }
-
-    let data = JSON.stringify({
-      id: id,
-
+    let achouId = false;
+    funcs.forEach((item) => {
+      if (item.id == id) {
+        achouId = true;
+      }
     });
-    let config = {
-      method: 'delete',
-      url: " http://localhost:3000/apagarFunc",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: data
-    }
-    axios.request(config)
-      .then((response) => {
-        console.log(response.data);
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (achouId == false || id == null) {
+      alert("Falha ao remover Funcionário")
+      return;
+    } else {
+      alert("REMOVIDO");
+
+      try {
+        axios.delete(`${host}/apagarFunc/${id}`)
+      } catch (erro) {
+        console.log('ERRO AO APAGAR Funcionario')
+      }
+      window.location.reload()
+
+    }
   }
 
 
   function listarBackendFunc() {
-    console.log('LISTANDO...')
     axios.post(`${host}/listarFunc`)
   }
 

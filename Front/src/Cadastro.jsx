@@ -1,41 +1,66 @@
 import './Home.css'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 const host = "http://localhost:3000"
 
 
 function Cadastro() {
-
+  useEffect(() => {
+    async function fetchDataEpi() {
+      try {
+        const response = await axios.post(`${host}/listarEpi`);
+        let epiResults = response.data.episResults;
+        console.log('epiResults')
+        console.log(epiResults)
+        setEpis(response.data.episResults);
+      } catch (error) {
+        console.error('Erro ao obter dados do epi:', error);
+      }
+    }
+    async function fetchDataFunc() {
+      try {
+        const response = await axios.post(`${host}/listarFunc`);
+        let FuncResults = response.data.FuncResults;
+        console.log('epiResults 2')
+        console.log(FuncResults)
+        setEpis(response.data.episResults);
+      } catch (error) {
+        console.error('Erro ao obter dados do func:', error);
+      }
+    }
+    fetchDataEpi();
+    fetchDataFunc();
+  }, []);
   const [IdFuncionario, setIdFuncionario] = useState('')
   const [IdEpi, setIdEpi] = useState('')
   const [Retirada, setRetirada] = useState('')
   const [Devolucao, setDevolucao] = useState('')
+  const [Epis, setEpis] = useState([])
+  const [Funcs, setFunc] = useState([])
 
-
-  function addRelatorio() {
+  function addRelatorioFront() {
     let dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
-    let resposta = null;
 
-    try {
-      if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '') {
-        alert("Dados inválidos");
-      } else {
-        resposta = axios.post(`${host}/relatorio`, dados);
-        // document.getElementById("RegistrarIdEpi").value = '';
-        // document.getElementById("RegistrarIdFunc").value = '';
-        // document.getElementById("RegistrarEpiRetirada").value = '';
-        // document.getElementById("RegistrarEpiDevolucao").value = '';
+
+
+    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '' || Retirada == '' || Devolucao == '') {
+      alert("Dados inválidos");
+    } else {
+      try {
+        axios.post(`${host}/addRelatorio`, dados);
+        document.getElementById("RegistrarIdEpi").value = '';
+        document.getElementById("RegistrarIdFunc").value = '';
+        document.getElementById("RegistrarEpiRetirada").value = '';
+        document.getElementById("RegistrarEpiDevolucao").value = '';
         alert("Dados inseridos com sucesso");
+      } catch (error) {
+        console.error('Erro ao enviar relatório:', error);
+        alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
+
       }
-    } catch (error) {
-      console.error('Erro ao enviar relatório:', error);
-      alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
-      // document.getElementById("RegistrarIdEpi").value = '';
-      // document.getElementById("RegistrarIdFunc").value = '';
-      // document.getElementById("RegistrarEpiRetirada").value = '';
-      // document.getElementById("RegistrarEpiDevolucao").value = '';
     }
+
   }
 
 
@@ -67,7 +92,7 @@ function Cadastro() {
               <input type='date' id="RegistrarEpiDevolucao" onChange={(evento) => setDevolucao(evento.target.value)} />
 
             </div>
-            <button className='adicionarEpi' onClick={addRelatorio}>
+            <button className='adicionarEpi' onClick={addRelatorioFront}>
               <span>Adicionar</span>
             </button>
           </div>
