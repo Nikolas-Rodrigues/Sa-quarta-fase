@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 
 function HEpi() {
   const [relatorios, setRelatorios] = useState([])
+  const [epi, setEpi] = useState([])
+
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +20,7 @@ function HEpi() {
           item.validade = format(new Date(item.validade), 'dd/mm/yyyy');
         })
         console.log(epiResults)
-        setEpis(response.data.episResults);
+        setEpi(response.data.episResults);
 
       } catch (error) {
         console.error('Erro ao obter dados do backend:', error);

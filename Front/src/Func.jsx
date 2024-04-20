@@ -259,7 +259,7 @@ function Func() {
           </div>
 
           <div className='excluirFunc' id="excluirFunc">
-            <h1>Excluir</h1>
+            <h1>Excluir por Id</h1>
             <input type='number' id="apagarFuncId" onChange={(evento) => setId(evento.target.value)} />
             <button onClick={apagar}>
               <span>Apagar</span>

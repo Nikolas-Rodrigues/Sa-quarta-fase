@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './Home.jsx'
 import Epi from './Epis.jsx'
 import Func from './Func.jsx'
-import HApi from './HApi.jsx'
+import HEpi from './HEpi.jsx'
 import HFunc from './HFunc.jsx'
 import Cadastro from './Cadastro.jsx'
 
@@ -14,7 +14,7 @@ const paginas = createBrowserRouter([
   { path: '/Epi', element: <Epi /> },
   { path: '/Funcionarios', element: <Func /> },
   { path: '/Cadastro', element: <Cadastro /> },
-  { path: '/HApi', element: <HApi /> },
+  { path: '/HEpi', element: <HEpi /> },
   { path: '/HFunc', element: <HFunc /> },
 
 

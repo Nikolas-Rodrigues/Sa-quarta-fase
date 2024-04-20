@@ -26,7 +26,7 @@ function Home() {
             <img src={logo} className='logo-foto' />
           </div>
           <div className='lado'>
-            <Link to={`/HApi`} className='link'>
+            <Link to={`/HEpi`} className='link'>
               <h1>Historico de uso de EPI</h1>
             </Link>
             <Link to={`/HFunc`} className='link'>
