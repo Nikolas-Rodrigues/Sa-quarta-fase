@@ -101,15 +101,15 @@ const apagarEpi = async (req, res) => {
 const addRelatorio = async (req, res) => {
     //Para adicionar no relatório
     try {
-        const {  IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
+        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
         console.log(`Relatorio : ${IdFuncionario}, ${IdEpi} ...`)
         if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao) return res.status(404).send({ mensagem: 'Informações incompletas' })
         await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
-    console.log('Cadastrado...')
-    debugger
-    const disponibilidade = false
-    
-    console.log('aLTERANDO...')    
+        console.log('Cadastrado...')
+        debugger
+        const disponibilidade = false
+
+        console.log('aLTERANDO...')
         const apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: IdEpi } })
 
         res.status(201).send({ apiAtuaizado })
@@ -117,9 +117,18 @@ const addRelatorio = async (req, res) => {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao inserir funcionario' })
     }
-     //Para
-   
 };
 
 
-export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio }
+const listarHistoricoFunc = async (req, res) => {
+    const { id } = req.body
+    try {
+        const registroConsulta = await Relatorios.findAll({ where: { IdFuncionario: id } })
+        res.status(200).send({ registroConsulta })
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar ou Funcionario não localizado' })
+    }
+}
+
+export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio, listarHistoricoFunc }

@@ -1,5 +1,5 @@
 import express from "express";
-import { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi,editarEpi,apagarEpi, addRelatorio} from '../controllers/controller.js'
+import { addFunc, listarFunc, apagarFunc, editarFunc, addEpis, listarEpi,editarEpi,apagarEpi, addRelatorio,listarHistoricoFunc} from '../controllers/controller.js'
 const router = express.Router()
 
 router.post("/addFunc", addFunc)
@@ -13,7 +13,7 @@ router.put("/editarEpi", editarEpi)
 router.delete("/apagarEpi/:id", apagarEpi)
 
 router.post("/addRelatorio", addRelatorio)
-
+router.post("/hfunc",listarHistoricoFunc)
 
 
 
