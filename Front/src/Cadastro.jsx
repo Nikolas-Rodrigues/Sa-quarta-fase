@@ -1,11 +1,18 @@
 import './Home.css'
-import { useState ,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 const host = "http://localhost:3000"
 
 
 function Cadastro() {
+  const [IdFuncionario, setIdFuncionario] = useState('')
+  const [IdEpi, setIdEpi] = useState('')
+  const [Retirada, setRetirada] = useState('')
+  const [Devolucao, setDevolucao] = useState('')
+  const [Epis, setEpis] = useState([])
+  const [Func, setFunc] = useState([])
+  
   useEffect(() => {
     async function fetchDataEpi() {
       try {
@@ -15,7 +22,7 @@ function Cadastro() {
         console.log(epiResults)
         setEpis(response.data.episResults);
       } catch (error) {
-        console.error('Erro ao obter dados do epi:', error);
+        console.log('Erro ao obter dados do epi:', error);
       }
     }
     async function fetchDataFunc() {
@@ -24,36 +31,44 @@ function Cadastro() {
         let FuncResults = response.data.FuncResults;
         console.log('epiResults 2')
         console.log(FuncResults)
-        setEpis(response.data.episResults);
+        setFunc(response.data.FuncResults);
       } catch (error) {
-        console.error('Erro ao obter dados do func:', error);
+        console.log('Erro ao obter dados do func:', error);
       }
     }
     fetchDataEpi();
     fetchDataFunc();
   }, []);
-  const [IdFuncionario, setIdFuncionario] = useState('')
-  const [IdEpi, setIdEpi] = useState('')
-  const [Retirada, setRetirada] = useState('')
-  const [Devolucao, setDevolucao] = useState('')
-  const [Epis, setEpis] = useState([])
-  const [Funcs, setFunc] = useState([])
+
 
   function addRelatorioFront() {
+    console.log('REGISTRANDO')
+    console.log(Func)
     let dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
 
 
-
-    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '' || Retirada == '' || Devolucao == '') {
+    if (Epis[IdEpi - 1] == undefined) {
+      alert('EPI NAO ENCONTRADO!')
+      return;
+    }
+    if (Func[IdFuncionario - 1] == undefined) {
+      alert('Funcionário NAO ENCONTRADO!')
+      return;
+    }
+    // console.log(Epis[IdEpi - 1].disponibilidade)
+    if (Epis[IdEpi - 1].disponibilidade == false) {
+      alert('EPI já está sendo usada!');
+      return;
+    }
+    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '' || Retirada == '' || Devolucao == '' ) {
       alert("Dados inválidos");
+      return;
     } else {
       try {
         axios.post(`${host}/addRelatorio`, dados);
-        document.getElementById("RegistrarIdEpi").value = '';
-        document.getElementById("RegistrarIdFunc").value = '';
-        document.getElementById("RegistrarEpiRetirada").value = '';
-        document.getElementById("RegistrarEpiDevolucao").value = '';
+      
         alert("Dados inseridos com sucesso");
+        window.location.reload();
       } catch (error) {
         console.error('Erro ao enviar relatório:', error);
         alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
@@ -62,6 +77,8 @@ function Cadastro() {
     }
 
   }
+
+
 
 
   return (
