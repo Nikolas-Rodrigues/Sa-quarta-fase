@@ -35,10 +35,10 @@ function HFunc() {
         < h1 > Historico de Funcionarios</h1>
       </Link >
       <div className='arrumar'>
-        <h1>id funcionari</h1>
-        <input type="number" onChange={(evento) => setId(evento.target.value)} />
-        <button onClick={buscar}>
-          Buscar
+        <h3 className='organizado'>ID Epi's</h3>
+        <input type='number' className='organizado' onChange={(evento) => setId(evento.target.value)} />
+        <button className='organizado' onClick={buscar}>
+          <span>Buscar</span>
         </button>
       </div>
       <div className='content'>

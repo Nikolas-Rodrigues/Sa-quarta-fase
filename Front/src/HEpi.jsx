@@ -14,6 +14,14 @@ function HEpi() {
       <Link to={"/"}>
         < h1 > Historico de Epis</h1>
       </Link >
+      <div className='arrumar'>
+        <h3 className='organizado'>ID Epi's</h3>
+        <input type='number' id="BuscarHistoricoEpi" className='organizado' onChange={(evento) => setDevolucao(evento.target.value)} />    
+      <button className='organizado'>
+        <span>Buscar</span>
+      </button>
+      </div>
+<div className='content'>
       <div className='dadosEpi'>
         <div>ID</div>
         <div>Nome</div>
@@ -32,7 +40,7 @@ function HEpi() {
           </li>
         ))}
       </ul>
-
+      </div>
     </div>
   )
 }
