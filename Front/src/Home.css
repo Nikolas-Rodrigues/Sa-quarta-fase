@@ -105,6 +105,8 @@ h1 {
 .navApiGeral,
 .navFuncGeral {
   margin-left: 25px;
+  position: relative;
+  left: -258px;
 }
 
 .navApi,
