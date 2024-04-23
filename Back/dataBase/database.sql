@@ -1,27 +1,27 @@
-CREATE TABLE epis (
+CREATE TABLE "Epis" (
   id SERIAL PRIMARY KEY,
   codigo VARCHAR(255),
   validade DATE,
   nome  VARCHAR(255),
   disponibilidade BOOLEAN
-);
+)
 
- CREATE TABLE funcionarios (
+ CREATE TABLE "Funcionarios" (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(255),
   cpf bigint,
   cargo VARCHAR(255)
-);
+)
 
-CREATE TABLE Relatorios(
+CREATE TABLE "Relatorios"(
   id SERIAL PRIMARY KEY,
-  IdFuncionario int,
-  IdEpi int,
-  Retirada DATE,
-  Devolucao DATE,
-);
+  idFuncionario int,
+  idEpi int,
+  retirada DATE,
+  devolucao DATE
+)
 
-INSERT INTO Relatorios(IdFuncionario, IdEpi, Retirada, Devolucao)
+INSERT INTO Relatorios(idFuncionario, idEpi, retirada, devolucao)
 VALUES ('1', '4', "2013-06-01","2013-06-01");
 
 

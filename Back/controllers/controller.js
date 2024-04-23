@@ -5,6 +5,7 @@ import Relatorios from "../models/Relatorios.js";
 const addFunc = async (req, res) => {
     try {
         const { nome, cpf, cargo } = req.body
+        
         if (!nome || !cpf || !cargo) return res.status(404).send({ mensagem: 'Informações incompletas' })
         const funcCadastrado = await Funcionario.create({ nome, cpf, cargo })
         res.status(201).send({ funcCadastrado })
@@ -99,18 +100,14 @@ const apagarEpi = async (req, res) => {
     }
 }
 const addRelatorio = async (req, res) => {
-    //Para adicionar no relatório
+  
     try {
-        const { IdFuncionario, IdEpi, Retirada, Devolucao } = req.body
-        console.log(`Relatorio : ${IdFuncionario}, ${IdEpi} ...`)
-        if (!IdFuncionario || !IdEpi || !Retirada || !Devolucao) return res.status(404).send({ mensagem: 'Informações incompletas' })
-        await Relatorios.create({ IdFuncionario, IdEpi, Retirada, Devolucao })
-        console.log('Cadastrado...')
-        debugger
-        const disponibilidade = false
+        let { idfuncionario, idepi, retirada, devolucao } = req.body
+        await Relatorios.create({ idfuncionario, idepi, retirada, devolucao })
+        
+        let disponibilidade = false
 
-        console.log('aLTERANDO...')
-        const apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: IdEpi } })
+        let apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: idepi } })
 
         res.status(201).send({ apiAtuaizado })
     } catch (erro) {

@@ -8,18 +8,20 @@ const Relatorios = sequelize.define('Relatorios', {
         primaryKey: true,
         autoIncrement: true,
     },
-    IdFuncionario: {
+    idfuncionario: {
         type: DataTypes.INTEGER
     },
-    IdEpi: {
+    idepi: {
         type: DataTypes.INTEGER
     },
-    Retirada: {
+    retirada: {
         type: DataTypes.DATE
     },
-    Devolucao: {
+    devolucao: {
         type: DataTypes.DATE
     },
-})
+},{
+    timestamps: false
+  })
 
 export default Relatorios 

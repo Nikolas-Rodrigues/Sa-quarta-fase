@@ -6,13 +6,13 @@ const host = "http://localhost:3000"
 
 
 function Cadastro() {
-  const [IdFuncionario, setIdFuncionario] = useState('')
-  const [IdEpi, setIdEpi] = useState('')
-  const [Retirada, setRetirada] = useState('')
-  const [Devolucao, setDevolucao] = useState('')
+  const [idfuncionario, setIdFuncionario] = useState('')
+  const [idepi, setIdEpi] = useState('')
+  const [retirada, setRetirada] = useState('')
+  const [devolucao, setDevolucao] = useState('')
   const [Epis, setEpis] = useState([])
   const [Func, setFunc] = useState([])
-  
+
   useEffect(() => {
     async function fetchDataEpi() {
       try {
@@ -44,48 +44,64 @@ function Cadastro() {
   function addRelatorioFront() {
     console.log('REGISTRANDO')
     console.log(Func)
-    let dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
+    let dados = { idfuncionario, idepi, retirada, devolucao };
     let acharIdEpi = false;
     let acharIdFunc = false;
 
     let pesqidEpi = [];
     let pesqidFunc = [];
 
-    Epis.forEach((item) => pesqidEpi.push(item.id))
+    Epis.forEach((item) => pesqidEpi.push([item.id, item.disponibilidade]))
     Func.forEach((item) => pesqidFunc.push(item.id))
 
-    for( let i = 0; i < pesqidEpi.length; i++){
-        if(pesqidEpi[i] == IdEpi) {
-          acharIdEpi = true;
-        }
+    //Verificação se existe EPI
+    for (let i = 0; i < pesqidEpi.length; i++) {
+      if (pesqidEpi[i][0] == idepi) {
+        acharIdEpi = true;
+      }
     }
-
-    for( let i = 0; i < pesqidFunc.length; i++){
-      if(pesqidFunc[i] == IdEpi) {
+    //Verificação se existe Func
+    for (let i = 0; i < pesqidFunc.length; i++) {
+      if (pesqidFunc[i] == idfuncionario) {
         acharIdFunc = true;
       }
-  }
-    console.log(pesqidEpi)
-    if (acharIdEpi == false) {
+    }
+
+    var arrayEpi = (Epi) => Epi.id == idepi;
+    var epiFilter = Epis.filter(arrayEpi);
+
+     //Verificação existencia de EPI
+     if (acharIdEpi == false) {
       alert('EPI NAO ENCONTRADO!')
+      return;
+    }
+    //Verificação existencia de EPI
+    if (acharIdFunc == false) {
+      alert('Funcionario NAO ENCONTRADO!')
+      return;
+    }
+    //Verificar se ja dispo é true
+    if (epiFilter[0].disponibilidade == false) {
+      alert('EPI Já foi retirado!')
       return;
     }
 
-    if (acharIdFunc == false) {
-      alert('EPI NAO ENCONTRADO!')
-      return;
-    }
+
    
-  
-    if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '' || Retirada == '' || Devolucao == '' ) {
+
+
+    if (retirada >= devolucao || idepi == '' || idfuncionario == '' || retirada == '' || devolucao == '') {
       alert("Dados inválidos");
       return;
     } else {
       try {
         axios.post(`${host}/addRelatorio`, dados);
-      
+        document.getElementById("RegistrarIdEpi").value = '';
+        document.getElementById("RegistrarIdFunc").value = '';
+        document.getElementById("RegistrarEpiRetirada").value = '';
+        document.getElementById("RegistrarEpiDevolucao").value = '';
         alert("Dados inseridos com sucesso");
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         console.error('Erro ao enviar relatório:', error);
         alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
@@ -94,9 +110,6 @@ function Cadastro() {
     }
 
   }
-
-
-
 
   return (
     <>

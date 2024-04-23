@@ -27,7 +27,8 @@ function Func() {
 
   function adicionar() {//perfeito
     if (nome == null || cpf == null || cargo == null) {
-      alert("Faltando dados!")
+      alert("Faltando dados!");
+      return;
     }
     const dados = { nome, cpf, cargo }
     axios.post(`${host}/addFunc`, dados)

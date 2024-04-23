@@ -20,6 +20,6 @@ const Epis = sequelize.define('Epis', {
     disponibilidade: {
         type: DataTypes.BOOLEAN
     },
-}, {tableName: 'Epis'})
+},{timestamps: false })
 
 export default Epis 
