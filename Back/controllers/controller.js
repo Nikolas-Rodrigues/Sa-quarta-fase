@@ -120,7 +120,7 @@ const addRelatorio = async (req, res) => {
 const listarHistoricoFunc = async (req, res) => {
     const { id } = req.body
     try {
-        const registroConsulta = await Relatorios.findAll({ where: { IdFuncionario: id } })
+        const registroConsulta = await Relatorios.findAll({ where: { idfuncionario: id } })
         res.status(200).send({ registroConsulta })
     } catch (erro) {
         console.log(erro)
