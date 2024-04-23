@@ -78,10 +78,11 @@ h1 {
   margin: auto;
   border-radius: 5%;
   text-align: center;
-
   z-index: 0;
   position: absolute;
   margin: 39px 17px;
+  overflow: scroll;
+  overflow-x: hidden
 }
 
 .excluir-epi,
@@ -144,7 +145,8 @@ h1 {
   left: 550px;
 }
 
-.navApi, .navFunc {
+.navApi,
+.navFunc {
   background-color: white;
 }
 
@@ -157,7 +159,7 @@ h1 {
   display: none;
 }
 
-	
+
 .todo {
   background-color: rgb(255, 255, 255);
   height: 350px;
@@ -178,32 +180,20 @@ h1 {
 }
 
 .organizar {
-display: flex;
-} 
+  display: flex;
+
+}
 
 .organizar div {
   width: 25%;
   text-align: start;
-  padding-bottom: 10px; 
-  margin-left: 30px; 
+  padding-bottom: 10px;
+  margin-left: 30px;
+
 }
 
-.funcId {
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.funcNome {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.funcCpf {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.funcCargo {
+.org {
   margin-left: auto;
   margin-right: auto;
 }
@@ -232,26 +222,6 @@ display: flex;
 .organizar1 div {
   width: 25%;
   text-align: start;
-  padding-bottom: 10px; 
-  margin-left: 30px; 
-}
-
-.epiId {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiNome {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiValidade {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.epiDisponibilidade {
-  margin-left: auto;
-  margin-right: auto;
+  padding-bottom: 10px;
+  margin-left: 30px;
 }

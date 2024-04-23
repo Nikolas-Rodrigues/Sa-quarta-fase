@@ -144,7 +144,6 @@ function Epi() {
     alert('Salvo com sucesso!');
     window.location.reload();
   }
-
  
 
   function editarBackend() {
@@ -233,10 +232,10 @@ function Epi() {
               {epi.map(epi => (
                 <li key={epi.id}>
                   <div className='organizar1'>
-                    <div className='epiId'>{epi.id}</div>
-                    <div className='epiNome'>{epi.nome}</div>
-                    <div className='epiValidade'>{epi.validade}</div>
-                    <div className='epiDisponibilidade'>{epi.disponibilidade}</div>
+                    <div className='org'>{epi.id}</div>
+                    <div className='org'>{epi.nome}</div>
+                    <div className='org'>{epi.validade}</div>
+                    <div className='org'>{epi.disponibilidade}</div>
                   </div>
                 </li>
               ))}
