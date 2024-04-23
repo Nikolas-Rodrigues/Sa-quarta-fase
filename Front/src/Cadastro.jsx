@@ -45,21 +45,38 @@ function Cadastro() {
     console.log('REGISTRANDO')
     console.log(Func)
     let dados = { IdFuncionario, IdEpi, Retirada, Devolucao };
+    let acharIdEpi = false;
+    let acharIdFunc = false;
 
+    let pesqidEpi = [];
+    let pesqidFunc = [];
 
-    if (Epis[IdEpi - 1] == undefined) {
+    Epis.forEach((item) => pesqidEpi.push(item.id))
+    Func.forEach((item) => pesqidFunc.push(item.id))
+
+    for( let i = 0; i < pesqidEpi.length; i++){
+        if(pesqidEpi[i] == IdEpi) {
+          acharIdEpi = true;
+        }
+    }
+
+    for( let i = 0; i < pesqidFunc.length; i++){
+      if(pesqidFunc[i] == IdEpi) {
+        acharIdFunc = true;
+      }
+  }
+    console.log(pesqidEpi)
+    if (acharIdEpi == false) {
       alert('EPI NAO ENCONTRADO!')
       return;
     }
-    if (Func[IdFuncionario - 1] == undefined) {
-      alert('Funcionário NAO ENCONTRADO!')
+
+    if (acharIdFunc == false) {
+      alert('EPI NAO ENCONTRADO!')
       return;
     }
-    // console.log(Epis[IdEpi - 1].disponibilidade)
-    if (Epis[IdEpi - 1].disponibilidade == false) {
-      alert('EPI já está sendo usada!');
-      return;
-    }
+   
+  
     if (Retirada >= Devolucao || IdEpi == '' || IdFuncionario == '' || Retirada == '' || Devolucao == '' ) {
       alert("Dados inválidos");
       return;
