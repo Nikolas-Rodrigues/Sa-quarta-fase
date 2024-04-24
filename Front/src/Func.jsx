@@ -39,12 +39,12 @@ function Func() {
 
   function editar() {
     const dadosEdit = { id, nome, cpf, cargo }
-    axios.put(`${host}/editarFunc`, dadosEdit)
     document.getElementById("EditarFuncNome").value = '';
     document.getElementById("EditarFuncCpf").value = '';
     document.getElementById("EditarFuncCargo").value = '';
     document.getElementById("EditarFuncId").value = '';
     if (nome != null && cpf != null && cargo != null && id != null) {
+      axios.put(`${host}/editarFunc`, dadosEdit)
       alert("Funcionario editado com sucesso");
       window.location.reload();
     } else {

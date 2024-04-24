@@ -86,10 +86,6 @@ function Cadastro() {
       return;
     }
 
-
-   
-
-
     if (retirada >= devolucao || idepi == '' || idfuncionario == '' || retirada == '' || devolucao == '') {
       alert("Dados inválidos");
       return;
@@ -101,7 +97,7 @@ function Cadastro() {
         document.getElementById("RegistrarEpiRetirada").value = '';
         document.getElementById("RegistrarEpiDevolucao").value = '';
         alert("Dados inseridos com sucesso");
-        // window.location.reload();
+         window.location.reload();
       } catch (error) {
         console.error('Erro ao enviar relatório:', error);
         alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");

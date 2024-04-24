@@ -116,6 +116,16 @@ const addRelatorio = async (req, res) => {
     }
 };
 
+const listarRelatorios = async (req, res) => {
+    try {
+        const relatorioResults = await Relatorios.findAll()
+        res.status(200).send({ relatorioResults })
+
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar Relatorios' })
+    }
+}
 
 const listarHistoricoFunc = async (req, res) => {
     const { id } = req.body
@@ -128,4 +138,20 @@ const listarHistoricoFunc = async (req, res) => {
     }
 }
 
-export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio, listarHistoricoFunc }
+
+const buscarEpi = async(req, res) => {
+    console.log('Buscando epi back')
+    try {
+        const { id } = req.params
+        const episResults = await Epis.findOne({ where: { id: id } })
+        res.status(200).send({ episResults })
+
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar' })
+    }
+}
+
+
+export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio,listarRelatorios,
+     listarHistoricoFunc , buscarEpi }
