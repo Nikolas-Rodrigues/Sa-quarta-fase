@@ -7,8 +7,9 @@ const host = "http://localhost:3000"
 
 function HEpi() {
   const [juncao, setJuncao] = useState([])
+  const [juncaoPermanente, setJuncaoPermanente] = useState([])
   const [id, setId] = useState([])
-
+  let trocar = false;
   useEffect(() => {
     async function fetchData() {
       try {
@@ -47,6 +48,7 @@ function HEpi() {
         }
         console.log(novaLista)
         setJuncao(novaLista);
+        setJuncaoPermanente(novaLista);
 
       } catch (error) {
         console.error('Erro ao obter dados do backend:', error);
@@ -57,11 +59,12 @@ function HEpi() {
   }, []);
 
   const buscarEpi = async (req, res) => {
+    
     console.log('BUSCANDO EPI front');
-    console.log(juncao);
+   
 
     let achouId = false;
-    juncao.forEach((item) => {
+    juncaoPermanente.forEach((item) => {
       if (item.id == id) {
         achouId = true;
       }
@@ -72,7 +75,7 @@ function HEpi() {
       alert("Id vazio ou Inválido");
       return;
     }
-    const procurar = juncao.find((element) => element.id == id);
+    const procurar = juncaoPermanente.find((element) => element.id == id);
     setJuncao([procurar])
     console.log(procurar)
 
@@ -99,6 +102,7 @@ function HEpi() {
           <div>Disponível</div>
         </div>
         <ul className='listar1'>
+       
           {juncao.map(juncao => (
             <li key={juncao.id}>
               <div className='organizar1'>

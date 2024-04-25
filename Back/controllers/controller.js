@@ -140,5 +140,5 @@ const listarHistoricoFunc = async (req, res) => {
 
 
 
-export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio,listarRelatorios,
-     listarHistoricoFunc  }
+export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio,
+    listarRelatorios, listarHistoricoFunc  }
