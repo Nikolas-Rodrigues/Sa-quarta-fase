@@ -20,8 +20,8 @@ const Relatorios = sequelize.define('Relatorios', {
     devolucao: {
         type: DataTypes.DATE
     },
-},{
+}, {
     timestamps: false
-  })
+})
 
 export default Relatorios 

@@ -12,6 +12,7 @@ function Cadastro() {
   const [devolucao, setDevolucao] = useState('')
   const [Epis, setEpis] = useState([])
   const [Func, setFunc] = useState([])
+  const [idepi2, setIdEpi2] = useState('')
 
   useEffect(() => {
     async function fetchDataEpi() {
@@ -40,7 +41,13 @@ function Cadastro() {
     fetchDataFunc();
   }, []);
 
+  async function exRelatorioFront() {
 
+    let dados = { idepi2 };
+    console.log(dados)
+    await axios.post(`${host}/exRelatorio`, dados);
+
+  }
   function addRelatorioFront() {
     console.log('REGISTRANDO')
     console.log(Func)
@@ -70,8 +77,8 @@ function Cadastro() {
     var arrayEpi = (Epi) => Epi.id == idepi;
     var epiFilter = Epis.filter(arrayEpi);
 
-     //Verificação existencia de EPI
-     if (acharIdEpi == false) {
+    //Verificação existencia de EPI
+    if (acharIdEpi == false) {
       alert('EPI NAO ENCONTRADO!')
       return;
     }
@@ -97,7 +104,7 @@ function Cadastro() {
         document.getElementById("RegistrarEpiRetirada").value = '';
         document.getElementById("RegistrarEpiDevolucao").value = '';
         alert("Dados inseridos com sucesso");
-         window.location.reload();
+        window.location.reload();
       } catch (error) {
         console.error('Erro ao enviar relatório:', error);
         alert("Erro ao enviar relatório, Verificar Id da Epi e do Funcionario");
@@ -111,34 +118,46 @@ function Cadastro() {
     <>
       <div className='index'>
         <Link to={"/"}>
-          <h1> Registra uso de Epi</h1>
+          <h1> Administrar uso de Epi</h1>
         </Link >
+
         <div className='todo'>
-          <div id="cadastrarEpi">
-            <div >
-              <h3>IdFuncionario: </h3>
-              <input type='number' id="RegistrarIdFunc" onChange={(evento) => setIdFuncionario(evento.target.value)} />
-            </div>
+          <div className='divisa'>
+            <div id="cadastrarEpi">
+              <div >
+                <h3>IdFuncionario: </h3>
+                <input type='number' id="RegistrarIdFunc" onChange={(evento) => setIdFuncionario(evento.target.value)} />
+              </div>
 
-            <div>
-              <h3>IdEpi:</h3>
-              <input type='number' id="RegistrarIdEpi" onChange={(evento) => setIdEpi(evento.target.value)} />
-            </div>
+              <div>
+                <h3>IdEpi:</h3>
+                <input type='number' id="RegistrarIdEpi" onChange={(evento) => setIdEpi(evento.target.value)} />
+              </div>
 
-            <div>
-              <h3>Retirada:</h3>
-              <input type='date' id="RegistrarEpiRetirada" onChange={(evento) => setRetirada(evento.target.value)} />
-            </div>
+              <div>
+                <h3>Retirada:</h3>
+                <input type='date' id="RegistrarEpiRetirada" onChange={(evento) => setRetirada(evento.target.value)} />
+              </div>
 
-            <div>
-              <h3>Entrega:</h3>
-              <input type='date' id="RegistrarEpiDevolucao" onChange={(evento) => setDevolucao(evento.target.value)} />
+              <div>
+                <h3>Entrega:</h3>
+                <input type='date' id="RegistrarEpiDevolucao" onChange={(evento) => setDevolucao(evento.target.value)} />
 
+              </div>
+              <button className='adicionarEpi' onClick={addRelatorioFront}>
+                <span>Adicionar</span>
+              </button>
             </div>
-            <button className='adicionarEpi' onClick={addRelatorioFront}>
-              <span>Adicionar</span>
+          </div>
+          <div className='divisa2'>
+            <h1>Excluir Registro</h1>
+            <input type='number' onChange={(evento) => setIdEpi2(evento.target.value)} />
+            <br />
+            <button className='adicionarEpi' onClick={exRelatorioFront}>
+              <span>Excluir</span>
             </button>
           </div>
+
         </div>
       </div>
     </>

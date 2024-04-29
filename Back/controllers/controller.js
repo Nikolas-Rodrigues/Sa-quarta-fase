@@ -5,7 +5,7 @@ import Relatorios from "../models/Relatorios.js";
 const addFunc = async (req, res) => {
     try {
         const { nome, cpf, cargo } = req.body
-        
+
         if (!nome || !cpf || !cargo) return res.status(404).send({ mensagem: 'Informações incompletas' })
         const funcCadastrado = await Funcionario.create({ nome, cpf, cargo })
         res.status(201).send({ funcCadastrado })
@@ -100,11 +100,11 @@ const apagarEpi = async (req, res) => {
     }
 }
 const addRelatorio = async (req, res) => {
-  
+
     try {
         let { idfuncionario, idepi, retirada, devolucao } = req.body
         await Relatorios.create({ idfuncionario, idepi, retirada, devolucao })
-        
+
         let disponibilidade = false
 
         let apiAtuaizado = await Epis.update({ disponibilidade }, { where: { id: idepi } })
@@ -138,7 +138,34 @@ const listarHistoricoFunc = async (req, res) => {
     }
 }
 
+const exRelatorio = async (req, res) => {
+    let disponibilidade = true
+    const { idepi2 } = req.body
+    console.log(idepi2)
+    try {
+        await Relatorios.destroy({ where: { id: idepi2 } })
+        let apiAtuaizadoNovo = await Epis.update({ disponibilidade }, { where: { id: idepi2 } })
+        console.log(apiAtuaizadoNovo)
+        res.status(201).send({ apiAtuaizadoNovo })
+    }
+    catch (erro) {
+        console.log("Deu errado")
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao apagar registro' })
+    }
+}
 
-
-export { addFunc, listarFunc, editarFunc, apagarFunc, addEpis, listarEpi, editarEpi, apagarEpi, addRelatorio,
-    listarRelatorios, listarHistoricoFunc  }
+export {
+    addFunc,
+    listarFunc,
+    editarFunc,
+    apagarFunc,
+    addEpis,
+    listarEpi,
+    editarEpi,
+    apagarEpi,
+    addRelatorio,
+    listarRelatorios,
+    listarHistoricoFunc,
+    exRelatorio
+}

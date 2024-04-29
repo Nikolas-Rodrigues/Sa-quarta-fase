@@ -62,7 +62,7 @@ h1 {
 .adicionarEpi,
 .alterarEpi,
 .apagarEpi,
-.adicionarFunc{
+.adicionarFunc {
   color: white;
   margin-top: 5%;
   background-color: blue;
@@ -188,7 +188,7 @@ h1 {
   justify-content: center;
   margin-left: 10px;
   border-radius: 10px;
-  }
+}
 
 .organizado {
   margin-right: 10px;
@@ -238,4 +238,16 @@ h1 {
   text-align: start;
   padding-bottom: 10px;
   margin-left: 30px;
+}
+
+.divisa {
+  display: inline-block;
+  margin: 25px 0px 0px -306px;
+  position: absolute;
+}
+
+.divisa2 {
+  display: inline-block;
+  margin: 93px 0px 0px 70px;
+  position: absolute;
 }

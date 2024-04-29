@@ -19,7 +19,7 @@ function Home() {
               <h1>Funcionarios</h1>
             </Link>
             <Link to={`/Cadastro`} className='link'>
-              <h1>Registar uso de epi</h1>
+              <h1>Administrar uso de epi</h1>
             </Link>
           </div>
           <div className='logo-div' >
