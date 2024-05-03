@@ -1,8 +1,8 @@
 import './Home.css'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 const host = "http://localhost:3000"
 
 
@@ -17,22 +17,27 @@ function Epi() {
     async function fetchData() {
       try {
         const response = await axios.post(`${host}/listarEpi`);
-         let epiResults = response.data.episResults;
+        let epiResults = response.data.episResults;
 
-         epiResults.forEach((item) =>{ 
-          if(item.disponibilidade == true){
+        epiResults.forEach((item) => {
+          if (item.disponibilidade == true) {
             item.disponibilidade = "Sim";
-          }else {
+          } else {
             item.disponibilidade = "Não";
           }
         })
 
-        epiResults.forEach((item) =>{ 
-   
-          item.validade = format(new Date(item.validade), 'dd/mm/yyyy');
+        epiResults.forEach((item) => {
+
+          let arrumar = item.validade.substr(0, 10);
+          let dia = arrumar.substr(8, 10)
+          let mes = arrumar.substr(5, 2)
+          let ano = arrumar.substr(0, 4)
+          item.validade = `${dia}/${mes}/${ano}`
         })
+        console.log(epiResults);
         setEpis(response.data.episResults);
-       
+
       } catch (error) {
         console.error('Erro ao obter dados do backend:', error);
       }
@@ -146,11 +151,11 @@ function Epi() {
     alert('Salvo com sucesso!');
     window.location.reload();
   }
- 
+
 
   function editarBackend() {
     const dadosEdit = { id, nome, codigo, validade }
-   
+
     axios.put(`${host}/editarEpi`, dadosEdit)
     if (nome != null && codigo != null && validade != null && id != null) {
       alert("Epis editado com sucesso")
@@ -158,7 +163,7 @@ function Epi() {
       alert("Erro ao editado Epis")
       return;
     }
- window.location.reload()
+    window.location.reload()
 
   }
 
@@ -175,14 +180,14 @@ function Epi() {
       return;
     } else {
       alert("REMOVIDO");
-   
+
       try {
         axios.delete(`${host}/apagarEpi/${id}`)
-      } catch(erro) {
+      } catch (erro) {
         console.log('ERRO AO APAGAR EPI')
       }
       window.location.reload()
-    
+
     }
 
   }
@@ -225,10 +230,10 @@ function Epi() {
 
           <div className='listarEpi' id="listarEpi">
             <div className='dadosEpi'>
-            <div>ID</div>
-            <div>Nome</div>
-            <div>Validade</div>
-            <div>Disponibilidade</div>
+              <div>ID</div>
+              <div>Nome</div>
+              <div>Validade</div>
+              <div>Disponibilidade</div>
             </div>
             <ul className='listar1'>
               {epi.map(epi => (

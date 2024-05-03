@@ -22,7 +22,11 @@ function HEpi() {
         console.log(relatorioResults)
         console.log(episResults)
         relatorioResults.forEach((item) => {
-          item.retirada = format(new Date(item.retirada), 'dd/mm/yyyy');
+          let arrumar = item.retirada.substr(0, 10);
+          let dia = arrumar.substr(8, 10)
+          let mes = arrumar.substr(5, 2)
+          let ano = arrumar.substr(0, 4)
+          item.retirada = `${dia}/${mes}/${ano}`
         })
         let novaLista = [];
         let x = 'Epi Dispinivel'

@@ -14,19 +14,32 @@ function HFunc() {
 
 
   async function buscar() {
+    console.log(funcs)
     const dados = { id }
     try {
-      const response = await axios.post(`${host}/hfunc`, dados);
+      const response = await axios.post(`${host}/hfunc`, dados); 
+      console.log(response.data.registroConsulta);
+
+      response.data.registroConsulta.forEach((item) => {
+        let arrumar = item.retirada.substr(0, 10);
+        let dia = arrumar.substr(8, 10)
+        let mes = arrumar.substr(5, 2)
+        let ano = arrumar.substr(0, 4)
+        item.retirada = `${dia}/${mes}/${ano}`
+  
+        let arrumarDois = item.devolucao.substr(0, 10);
+        let diaDois = arrumarDois.substr(8, 10)
+        let mesDois = arrumarDois.substr(5, 2)
+        let anoDois = arrumarDois.substr(0, 4)
+        item.devolucao = `${diaDois}/${mesDois}/${anoDois}`
+      })
+
       setFuncs(response.data.registroConsulta);
-      console.log(response.data.registroConsulta)
     } catch (error) {
       console.error('Erro ao obter dados do backend:', error);
     }
 
-    funcs.forEach((item) => {
-      item.retirada = format(new Date(item.retirada), 'dd/mm/yyyy');
-      item.devolucao = format(new Date(item.devolucao), 'dd/mm/yyyy');
-    })
+   
   }
   return (
     <div className='index'>
