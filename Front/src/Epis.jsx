@@ -140,6 +140,8 @@ function Epi() {
     }
     let disponibilidade = false
     const dados = { nome, codigo, validade, disponibilidade }
+    console.log(validade)
+
     axios.post(`${host}/epi`, dados)
     alert('Salvo com sucesso!');
     window.location.reload();
@@ -148,7 +150,7 @@ function Epi() {
 
   function editarBackend() {
     const dadosEdit = { id, nome, codigo, validade }
-
+   
     axios.put(`${host}/editarEpi`, dadosEdit)
     if (nome != null && codigo != null && validade != null && id != null) {
       alert("Epis editado com sucesso")

@@ -27,7 +27,7 @@ const listarFunc = async (req, res) => {
 }
 const apagarFunc = async (req, res) => {
     console.log('BACKENDD')
-    debugger
+    
     try {
         const { id } = req.params
         await Funcionario.destroy({ where: { id } })
@@ -89,7 +89,6 @@ const editarEpi = async (req, res) => {
 }
 
 const apagarEpi = async (req, res) => {
-
     try {
         const { id } = req.params
         await Epis.destroy({ where: { id } })
@@ -139,12 +138,13 @@ const listarHistoricoFunc = async (req, res) => {
 }
 
 const exRelatorio = async (req, res) => {
+
     let disponibilidade = true
-    const { idepi2 } = req.body
-    console.log(idepi2)
+    const { idRel } = req.params
+    console.log(`foi back ${idRel}`)
     try {
-        await Relatorios.destroy({ where: { id: idepi2 } })
-        let apiAtuaizadoNovo = await Epis.update({ disponibilidade }, { where: { id: idepi2 } })
+        await Relatorios.destroy({ where: { id: idRel } })
+        let apiAtuaizadoNovo = await Epis.update({ disponibilidade }, { where: { id: idRel } })
         console.log(apiAtuaizadoNovo)
         res.status(201).send({ apiAtuaizadoNovo })
     }

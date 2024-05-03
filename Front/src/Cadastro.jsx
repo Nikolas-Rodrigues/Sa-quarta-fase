@@ -12,15 +12,14 @@ function Cadastro() {
   const [devolucao, setDevolucao] = useState('')
   const [Epis, setEpis] = useState([])
   const [Func, setFunc] = useState([])
-  const [idepi2, setIdEpi2] = useState('')
+  const [Rels, setRels] = useState([])
+  const [idRel, setIdRel] = useState('')
 
   useEffect(() => {
     async function fetchDataEpi() {
       try {
         const response = await axios.post(`${host}/listarEpi`);
-        let epiResults = response.data.episResults;
-        console.log('epiResults')
-        console.log(epiResults)
+
         setEpis(response.data.episResults);
       } catch (error) {
         console.log('Erro ao obter dados do epi:', error);
@@ -29,28 +28,55 @@ function Cadastro() {
     async function fetchDataFunc() {
       try {
         const response = await axios.post(`${host}/listarFunc`);
-        let FuncResults = response.data.FuncResults;
-        console.log('epiResults 2')
-        console.log(FuncResults)
         setFunc(response.data.FuncResults);
+      } catch (error) {
+        console.log('Erro ao obter dados do func:', error);
+      }
+    }
+    async function fetchDataRelat() {
+      try {
+        const response = await axios.post(`${host}/listarRelatorios`);
+ 
+        setRels(response.data.relatorioResults);
       } catch (error) {
         console.log('Erro ao obter dados do func:', error);
       }
     }
     fetchDataEpi();
     fetchDataFunc();
+    fetchDataRelat();
   }, []);
 
-  async function exRelatorioFront() {
+   function exRelatorioFront() {
+    console.log(Rels)
+    let acharRel = false;
 
-    let dados = { idepi2 };
+
+    //Verificação se existe Relatorios
+    for (let i = 0; i < Rels.length; i++) {
+      console.log(Rels[i].id)
+      if (Rels[i].id == idRel) {
+        acharRel = true;
+      }
+    }
+
+    if (acharRel == false) {
+      alert('Esse id não existe!')
+      return;
+    }
+
+    let dados = { idRel };
     console.log(dados)
-    await axios.post(`${host}/exRelatorio`, dados);
-
+    try {
+     axios.delete(`${host}/exRelatorio/${idRel}`);
+     alert("Dados Excluidos com sucesso!");
+     window.location.reload();
+    }catch(erro) {
+      console.log('Erro ao excluir dados!')
+    }
   }
   function addRelatorioFront() {
-    console.log('REGISTRANDO')
-    console.log(Func)
+
     let dados = { idfuncionario, idepi, retirada, devolucao };
     let acharIdEpi = false;
     let acharIdFunc = false;
@@ -151,7 +177,7 @@ function Cadastro() {
           </div>
           <div className='divisa2'>
             <h1>Excluir Registro</h1>
-            <input type='number' onChange={(evento) => setIdEpi2(evento.target.value)} />
+            <input type='number' onChange={(evento) => setIdRel(evento.target.value)} />
             <br />
             <button className='adicionarEpi' onClick={exRelatorioFront}>
               <span>Excluir</span>

@@ -26,6 +26,7 @@ function HEpi() {
         })
         let novaLista = [];
         let x = 'Epi Dispinivel'
+        let sim = 'Sim';
         for (let i = 0; i < episResults.length; i++) {
           let achar = false;
           for (let j = 0; j < relatorioResults.length; j++) {
@@ -41,7 +42,7 @@ function HEpi() {
           }
           if (achar == false) {
             novaLista.push({
-              id: episResults[i].id, idfuncionario: x, idepi: x, regEntrada: x, disponibilidade: x
+              id: episResults[i].id, idfuncionario: x, idepi: x, regEntrada: x, disponibilidade: sim
             })
           }
 
