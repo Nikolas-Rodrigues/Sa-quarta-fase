@@ -275,7 +275,7 @@ function Epi() {
           </div>
 
           <div className='excluirEpi' id="excluirEpi">
-            <h1>Excluir</h1>
+            <h1>Excluir por ID</h1>
             <input type='number' id="apagarEpi" onChange={(evento) => setId(evento.target.value)} />
             <button onClick={removerBackend}>
               <span>Apagar</span>
